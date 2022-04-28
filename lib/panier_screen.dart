@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:wemove_test/reservation_card.dart';
 
 class PanierScreen extends StatefulWidget {
@@ -16,18 +17,24 @@ class _PanierScreenState extends State<PanierScreen> {
         title: Text("Mon panier"),
         leading: Icon(Icons.arrow_back),
       ),
-      body: Column(
-        children: [
-          Text("batata"),
-          ListView.builder(
-              itemCount: 3,
-              shrinkWrap: true,
-              itemBuilder: (context, index){
-                return ReservationCard();
-              }
-          ),
-          Text("ofkfdkfdkfgfkmgkml")
-        ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          children: [
+            Text("batata"),
+            Text("batata"),
+            SizedBox(
+              height: 500,
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: 10,
+                  itemBuilder: (context, index){
+                    return ReservationCard();
+                  }
+              ),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: Container(
         child: Row(

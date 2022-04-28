@@ -13,7 +13,18 @@ class ReservationCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("test test"),
+                Container(
+                    decoration: BoxDecoration(
+                        color: Colors.blueAccent,
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: Column(
+                      children: [
+                        Text("Date1"),
+                        Text("Date2")
+                      ],
+                    )
+                ),
                 IconButton(
                   icon: Icon(Icons.delete),
                   onPressed: (){},
