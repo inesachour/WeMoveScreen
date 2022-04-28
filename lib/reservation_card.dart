@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wemove_test/constants/colors.dart';
+import 'package:wemove_test/widgets/card_widgets.dart';
 
 class ReservationCard extends StatelessWidget {
   const ReservationCard({Key? key}) : super(key: key);
@@ -29,7 +31,7 @@ class ReservationCard extends StatelessWidget {
                       height: 50,
                       width: 75,
                       decoration: BoxDecoration(
-                          color: Colors.blueAccent,
+                          color: thirdBackgroundColor,
                           borderRadius: BorderRadius.circular(10)
                       ),
                       child: Column(
@@ -41,30 +43,32 @@ class ReservationCard extends StatelessWidget {
                       )
                   ),
                   IconButton(
-                    icon: Icon(Icons.delete),
+                    icon: Icon(Icons.delete, color: Colors.white,),
                     onPressed: (){},
                   ),
                 ],
               ),
+              SizedBox(height: 15,),
               Text("Day Mega Passage", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 20),),
+              SizedBox(height: 10,),
               Text("Lyon Sport", style: TextStyle(color: Colors.white, fontSize: 15)),
+              SizedBox(height: 7,),
               Text("de 1h à 7h", style: TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.w700)),
+              SizedBox(height: 7,),
               Text("Places réservés", style: TextStyle(color: Colors.white, fontSize: 15)),
+              SizedBox(height: 20,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("price", style: TextStyle(color: Colors.white)),
+                  Text("10.00", style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800)),
                   Row(
                     children: [
-                      TextButton(
-                        child: Text("-"),
-                        onPressed: (){},
+                      incdecButton(color: secondaryBackgroundColor, text: "-"),
+                      SizedBox(
+                        width: 40,
+                          child: Text("0", style: TextStyle(color: Colors.white,fontSize: 16),textAlign: TextAlign.center,)
                       ),
-                      Text("0", style: TextStyle(color: Colors.white)),
-                      TextButton(
-                        child: Text("+"),
-                        onPressed: (){},
-                      ),
+                      incdecButton(color: thirdBackgroundColor, text: "+"),
                     ],
                   ),
                 ],

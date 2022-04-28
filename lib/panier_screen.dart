@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:wemove_test/constants/colors.dart';
 import 'package:wemove_test/reservation_card.dart';
 
 class PanierScreen extends StatefulWidget {
@@ -10,41 +11,68 @@ class PanierScreen extends StatefulWidget {
 }
 
 class _PanierScreenState extends State<PanierScreen> {
+
   @override
   Widget build(BuildContext context) {
+
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Mon panier"),
-        leading: Icon(Icons.arrow_back),
+        leading: ElevatedButton(
+          child: Icon(Icons.arrow_back), 
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(secondaryBackgroundColor),
+          ),
+          onPressed: (){},
+        ),
+        backgroundColor: primaryBackgroundColor,
+        elevation: 0,
+
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          children: [
-            Text("batata"),
-            Text("batata"),
-            SizedBox(
-              height: 500,
-              child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: 10,
-                  itemBuilder: (context, index){
-                    return ReservationCard();
-                  }
+      body: Container(
+        color: primaryBackgroundColor,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                          width: width,
+                          child: Text("batata", textAlign: TextAlign.left,style: TextStyle(color: Colors.white,),)
+                      ),
+                      SizedBox(
+                          width: width,
+                          child: Text("Vider le panier", textAlign: TextAlign.right, style: TextStyle(color: Colors.white, fontSize: 16,decoration: TextDecoration.underline))
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ],
+
+              Expanded(
+                flex: 7,
+                child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: 10,
+                    itemBuilder: (context, index){
+                      return ReservationCard();
+                    }
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-      bottomNavigationBar: Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("ok"),
-            ElevatedButton(child: Text("ok"),onPressed: (){},)
-          ],
-        ),
-      )
+
     );
   }
 }
