@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wemove_test/reservation_card.dart';
 
 class PanierScreen extends StatefulWidget {
   const PanierScreen({Key? key}) : super(key: key);
@@ -20,10 +21,12 @@ class _PanierScreenState extends State<PanierScreen> {
           Text("batata"),
           ListView.builder(
               itemCount: 3,
+              shrinkWrap: true,
               itemBuilder: (context, index){
-                return Icon(Icons.backpack);
+                return ReservationCard();
               }
           ),
+          Text("ofkfdkfdkfgfkmgkml")
         ],
       ),
       bottomNavigationBar: Container(
