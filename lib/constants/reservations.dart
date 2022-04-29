@@ -1,5 +1,7 @@
 
 
+import 'package:flutter/material.dart';
+
 var reservations = [
   Reservation(
       title: "Cuisses Abdos Fessiers",
@@ -10,8 +12,16 @@ var reservations = [
       image: "assets/image.jpg"
   ),
   Reservation(
-      title: "Cuisses Abdos Fessiers",
-      place: "Lyon Sport",
+      title: "Cuisses Fessiers",
+      place: "Task Sport",
+      price: 8.00,
+      date: DateTime(17082000),
+      reservedPlaces: 0,
+      image: "assets/image.jpg"
+  ),
+  Reservation(
+      title: "Fessiers",
+      place: "Lyon",
       price: 8.00,
       date: DateTime(17082000),
       reservedPlaces: 0,
@@ -22,15 +32,7 @@ var reservations = [
       place: "Lyon Sport",
       price: 8.00,
       date: DateTime(17082000),
-      reservedPlaces: 0,
-      image: "assets/image.jpg"
-  ),
-  Reservation(
-      title: "Cuisses Abdos Fessiers",
-      place: "Lyon Sport",
-      price: 8.00,
-      date: DateTime(17082000),
-      reservedPlaces: 0,
+      reservedPlaces: 2,
       image: "assets/image.jpg"
   ),
   Reservation(
@@ -44,7 +46,7 @@ var reservations = [
 ];
 
 
-class Reservation {
+class Reservation extends ChangeNotifier{
 
   static var _id = 0;
 

@@ -19,6 +19,8 @@ class _PanierScreenState extends State<PanierScreen> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
+    var total = calculateTotal(reservations);
+
 
     return Scaffold(
       appBar: AppBar(
@@ -45,13 +47,17 @@ class _PanierScreenState extends State<PanierScreen> {
                   Expanded(
                     flex: 1,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       child: Column(
                         children: [
+                          SizedBox(height: 10,),
                           SizedBox(
                               width: width,
-                              child: Text("batata", textAlign: TextAlign.left,style: TextStyle(color: Colors.white,),)
+                              child: Text(
+                                "Cette réservation n'est pas pour toi? Après avoir finalisé l'achat, tu pourras modifier le bénéficiaire de chaque accès en indiquant son nom.",
+                                textAlign: TextAlign.left,style: TextStyle(color: Colors.white,fontSize: 14),)
                           ),
+                          SizedBox(height: 10,),
                           SizedBox(
                               width: width,
                               child: InkWell(
@@ -73,7 +79,7 @@ class _PanierScreenState extends State<PanierScreen> {
                   ),
 
                   Expanded(
-                    flex: 7,
+                    flex: 4,
                     child: reservations.length > 0 ? ListView.builder(
                         scrollDirection: Axis.vertical,
                         itemCount: reservations.length,
@@ -123,7 +129,20 @@ class _PanierScreenState extends State<PanierScreen> {
                     children: [
                       Column(
                         children: [
-                          Text("Total"),
+                          Text("Total", style: TextStyle(color: Colors.white), textAlign: TextAlign.start,),
+                          RichText(
+                            text: TextSpan(
+                                text: total.toString(),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700),
+                                children: <TextSpan>[
+                                  TextSpan(text: 'DT',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 14),
+                                  )
+                                ]
+                            ),
+                          ),
                         ],
                       ),
                       ElevatedButton(
@@ -147,4 +166,12 @@ class _PanierScreenState extends State<PanierScreen> {
 
     );
   }
+}
+
+calculateTotal(List<Reservation> reservations){
+  double total=0;
+  reservations.forEach(
+          (e) => total += e.price*e.reservedPlaces
+  );
+  return total;
 }

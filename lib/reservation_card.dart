@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:wemove_test/constants/colors.dart';
 import 'package:wemove_test/constants/reservations.dart';
 import 'package:wemove_test/widgets/card_widgets.dart';
@@ -20,6 +21,11 @@ class _ReservationCardState extends State<ReservationCard> {
 
   @override
   Widget build(BuildContext context) {
+
+    var date = widget.reservation.date;
+    var jour = capitalize(DateFormat('EEE dd',"FR-fr").format(date).replaceAll('.', ''));
+    var mois = capitalize(DateFormat('MMM',"fr").format(date).replaceAll('.', ''));
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10)
@@ -50,8 +56,8 @@ class _ReservationCardState extends State<ReservationCard> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Jeu 10", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 18),),
-                          Text("Fév", style: TextStyle(color: Colors.white, fontSize: 16))
+                          Text(jour, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 18),),
+                          Text(mois, style: TextStyle(color: Colors.white, fontSize: 16))
                         ],
                       )
                   ),
@@ -77,7 +83,7 @@ class _ReservationCardState extends State<ReservationCard> {
               ),
               SizedBox(height: 15,),
               Text(
-                "ok",
+                widget.reservation.title,
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
@@ -85,16 +91,16 @@ class _ReservationCardState extends State<ReservationCard> {
                 ),
               ),
               SizedBox(height: 10,),
-              Text("Lyon Sport", style: TextStyle(color: Colors.white, fontSize: 15)),
+              Text(widget.reservation.place, style: TextStyle(color: Colors.white, fontSize: 15)),
               SizedBox(height: 7,),
               Text("de 1h à 7h", style: TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.w700)),
               SizedBox(height: 7,),
-              Text("Places réservés", style: TextStyle(color: Colors.white, fontSize: 15)),
+              Text("Places réservés: "+widget.reservation.reservedPlaces.toString(), style: TextStyle(color: Colors.white, fontSize: 15)),
               SizedBox(height: 20,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("10.00", style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800)),
+                  Text(widget.reservation.price.toString(), style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800)),
                   Row(
                     children: [
                       incdecButton(color: secondaryBackgroundColor, text: "-", onPressed: (){
@@ -126,6 +132,8 @@ class _ReservationCardState extends State<ReservationCard> {
     );
   }
 }
+
+String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
 
 
 
