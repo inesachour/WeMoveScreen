@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:wemove_test/constants/colors.dart';
-import 'package:wemove_test/constants/reservations.dart';
-import 'package:wemove_test/widgets/card_widgets.dart';
+import 'package:wemove_test/data/reservations.dart';
+import 'package:wemove_test/widgets/displaying_widgets.dart';
 
 class ReservationCard extends StatefulWidget {
 
@@ -24,7 +24,6 @@ class _ReservationCardState extends State<ReservationCard> {
   String? duree = null;
 
 
-
   @override
   Widget build(BuildContext context) {
 
@@ -32,6 +31,7 @@ class _ReservationCardState extends State<ReservationCard> {
       duree = "De "+ widget.reservation.heureDebut! + " à "+ widget.reservation.heureFin!;
     }
 
+    //Duration Time formatting to french
     initializeDateFormatting('fr');
     var date = widget.reservation.date;
     var jour = capitalize(DateFormat('EEE dd',"FR-fr").format(date).replaceAll('.', ''));
@@ -57,6 +57,8 @@ class _ReservationCardState extends State<ReservationCard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+
+                  //Displaying Date
                   Container(
                       height: 60,
                       width: 75,
@@ -72,6 +74,9 @@ class _ReservationCardState extends State<ReservationCard> {
                         ],
                       )
                   ),
+
+
+                  //Delete Button
                   Row(
                     children: [
                       InkWell(
@@ -93,6 +98,9 @@ class _ReservationCardState extends State<ReservationCard> {
                 ],
               ),
               SizedBox(height: 15,),
+
+
+              //Displaying Title
               Text(
                 widget.reservation.title,
                 style: TextStyle(
@@ -102,18 +110,41 @@ class _ReservationCardState extends State<ReservationCard> {
                 ),
               ),
               SizedBox(height: 10,),
+
+
+              //Displaying place
               Text(widget.reservation.place, style: TextStyle(color: Colors.white, fontSize: 15)),
               SizedBox(height: 7,),
+
+
+              //Displaying duration if exists
               duree != null ? DurationWidget(duree: duree!): SizedBox(),
               SizedBox(height: 7,),
+
+
+              //Displaying reserved Places
               Text("Places réservés: "+widget.reservation.reservedPlaces.toString(), style: TextStyle(color: Colors.white, fontSize: 15)),
               SizedBox(height: 20,),
+
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(widget.reservation.price.toStringAsFixed(2), style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800)),
+
+                  //Displating price
+                  DisplayPrice(
+                      text: widget.reservation.price.toStringAsFixed(2),
+                      fontWeight: FontWeight.w800,
+                      fontSizeMainText: 22,
+                      fontSizeCurrency: 13
+                  ),
+
+
+                  //Displaying, increasing and decreasing reserved places
                   Row(
                     children: [
+
+                      //Decrement Button
                       incdecButton(color: secondaryBackgroundColor, text: "-", onPressed: (){
                         setState(() {
                           if(widget.reservation.reservedPlaces>0){
@@ -122,12 +153,16 @@ class _ReservationCardState extends State<ReservationCard> {
                           }
                         });
                       }),
+
+                      //Number of reserved places
                       SizedBox(
                         width: 40,
                           child: Text( widget.reservation.reservedPlaces.toString(),
                             style: TextStyle(color: Colors.white,fontSize: 16),textAlign: TextAlign.center,
                           )
                       ),
+
+                      //Increment Button
                       incdecButton(color: thirdBackgroundColor, text: "+",onPressed:  (){
                         setState(() {
                           widget.reservation.reservedPlaces++;

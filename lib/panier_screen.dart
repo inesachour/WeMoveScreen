@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:wemove_test/constants/colors.dart';
-import 'package:wemove_test/constants/reservations.dart';
+import 'package:wemove_test/data/reservations.dart';
 import 'package:wemove_test/reservation_card.dart';
 import 'package:wemove_test/widgets/panier_widgets.dart';
 
@@ -24,6 +24,8 @@ class _PanierScreenState extends State<PanierScreen> {
 
 
     return Scaffold(
+
+      //APPBAR
       appBar: AppBar(
         title: Text("Mon panier", style: TextStyle(fontWeight: FontWeight.w700),),
         leading: Container(
@@ -37,8 +39,13 @@ class _PanierScreenState extends State<PanierScreen> {
         backgroundColor: primaryBackgroundColor,
         elevation: 0,
       ),
+
+
+
       body: Stack(
         children: [
+
+          //Text and Reservations Scroll
           Container(
             color: primaryBackgroundColor,
             child: Padding(
@@ -111,6 +118,10 @@ class _PanierScreenState extends State<PanierScreen> {
               ),
             ),
           ),
+
+
+
+          //Bottom Navigation Bar
           Positioned(
               bottom: 0,
               child: Container(

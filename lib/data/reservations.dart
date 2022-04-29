@@ -2,16 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-
 var reservations = [
-  Reservation(
-      title: "Cuisses Abdos Fessiers",
-      place: "Lyon Sport",
-      price: 8,
-      date: DateTime.now(),
-      reservedPlaces: 1,
-      image: "assets/images/gym.jpg"
-  ),
   Reservation(
       title: "Cardio",
       place: "California Gym",
@@ -29,7 +20,7 @@ var reservations = [
       image: "assets/images/musculation.jpg"
   ),
   Reservation(
-      title: "Spinnig",
+      title: "Spinning",
       place: "California Gym",
       price: 12,
       date: DateTime(2022,4,30),
