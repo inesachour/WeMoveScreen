@@ -7,42 +7,42 @@ var reservations = [
   Reservation(
       title: "Cuisses Abdos Fessiers",
       place: "Lyon Sport",
-      price: 20.00,
-      date: DateTime(17082000),
-      reservedPlaces: 0,
-      image: "assets/image.jpg"
+      price: 8,
+      date: DateTime.now(),
+      reservedPlaces: 1,
+      image: "assets/images/gym.jpg"
   ),
   Reservation(
-      title: "Cuisses Fessiers",
-      place: "Task Sport",
-      price: 10.00,
-      date: DateTime(17082000),
-      reservedPlaces: 0,
-      image: "assets/image.jpg"
+      title: "Cardio",
+      place: "California Gym",
+      price: 10,
+      date: DateTime.now(),
+      reservedPlaces: 1,
+      image: "assets/images/cardio.jpg"
   ),
   Reservation(
-      title: "Fessiers",
-      place: "Lyon",
-      price: 8.00,
-      date: DateTime(17082000),
-      reservedPlaces: 0,
-      image: "assets/image.jpg"
+      title: "Musculation",
+      place: "Exhale Club",
+      price: 12,
+      date: DateTime(2022,4,29),
+      reservedPlaces: 1,
+      image: "assets/images/musculation.jpg"
   ),
   Reservation(
-      title: "Cuisses Abdos Fessiers",
-      place: "Lyon Sport",
-      price: 8.00,
-      date: DateTime(17082000),
+      title: "Spinnig",
+      place: "California Gym",
+      price: 12,
+      date: DateTime(2022,4,30),
       reservedPlaces: 2,
-      image: "assets/image.jpg"
+      image: "assets/images/spinning.jpg"
   ),
   Reservation(
-      title: "Cuisses Abdos Fessiers",
-      place: "Lyon Sport",
-      price: 10.00,
-      date: DateTime(17082000),
-      reservedPlaces: 5,
-      image: "assets/image.jpg",
+      title: "Zumba",
+      place: "Gym Box",
+      price: 10,
+      date: DateTime(2022,4,29),
+      reservedPlaces: 1,
+      image: "assets/images/zumba.jpg",
       heureDebut: "19:00",
       heureFin: "23:00"
   ),

@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:wemove_test/constants/colors.dart';
 import 'package:wemove_test/constants/reservations.dart';
 import 'package:wemove_test/reservation_card.dart';
+import 'package:wemove_test/widgets/panier_widgets.dart';
 
 class PanierScreen extends StatefulWidget {
   const PanierScreen({Key? key}) : super(key: key);
@@ -24,17 +25,17 @@ class _PanierScreenState extends State<PanierScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Mon panier"),
-        leading: ElevatedButton(
-          child: Icon(Icons.arrow_back), 
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(secondaryBackgroundColor),
+        title: Text("Mon panier", style: TextStyle(fontWeight: FontWeight.w700),),
+        leading: Container(
+          margin: EdgeInsets.all(5),
+          child: Icon(Icons.arrow_back),
+          decoration: BoxDecoration(
+            color: secondaryBackgroundColor,
+            borderRadius: BorderRadius.circular(10)
           ),
-          onPressed: (){},
         ),
         backgroundColor: primaryBackgroundColor,
         elevation: 0,
-
       ),
       body: Stack(
         children: [
@@ -124,40 +125,7 @@ class _PanierScreenState extends State<PanierScreen> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          Text("Total", style: TextStyle(color: Colors.white), textAlign: TextAlign.start,),
-                          RichText(
-                            text: TextSpan(
-                                text: total.toStringAsFixed(2),
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700),
-                                children: <TextSpan>[
-                                  TextSpan(text: 'DT',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 14),
-                                  )
-                                ]
-                            ),
-                          ),
-                        ],
-                      ),
-                      ElevatedButton(
-                        child: Text("Continuer"),
-                        onPressed: (){},
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(thirdBackgroundColor),
-                          fixedSize: MaterialStateProperty.all(Size(width*0.32,height*0.08)),
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)
-                          ))
-                        ),
-                      )
-                    ],
-                  ),
+                  child: BottomNavBar(height: height, width: width, total: total),
                 ),
               )
           ),

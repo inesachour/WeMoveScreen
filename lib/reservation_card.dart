@@ -45,7 +45,7 @@ class _ReservationCardState extends State<ReservationCard> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
-            image: AssetImage("assets/image.jpg"),
+            image: AssetImage(widget.reservation.image),
             fit: BoxFit.cover,
           ),
         ),
