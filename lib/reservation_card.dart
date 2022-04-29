@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:wemove_test/constants/colors.dart';
+import 'package:wemove_test/constants/reservations.dart';
 import 'package:wemove_test/widgets/card_widgets.dart';
 
-class ReservationCard extends StatelessWidget {
-  const ReservationCard({Key? key}) : super(key: key);
+class ReservationCard extends StatefulWidget {
+
+  ReservationCard({required this.reservation , required this.deleting});
+
+  Reservation reservation;
+  var deleting;
+
+  @override
+  State<ReservationCard> createState() => _ReservationCardState();
+}
+
+class _ReservationCardState extends State<ReservationCard> {
+
+  bool onDeleteClicked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +55,35 @@ class ReservationCard extends StatelessWidget {
                         ],
                       )
                   ),
-                  IconButton(
-                    icon: Icon(Icons.delete, color: Colors.white,),
-                    onPressed: (){},
+                  Row(
+                    children: [
+                      InkWell(
+                          child: Icon(Icons.delete, color: onDeleteClicked ? Colors.red :Colors.white,),
+                          onTap: (){
+                            setState(() {
+                              onDeleteClicked = !onDeleteClicked;
+                            });
+                          }
+                      ),
+
+                      onDeleteClicked ? InkWell(
+                          child: Text("Supprimer", style: TextStyle(color: Colors.red, fontSize: 16),),
+                          onTap: widget.deleting,
+
+                      ): SizedBox(),
+                    ],
                   ),
                 ],
               ),
               SizedBox(height: 15,),
-              Text("Day Mega Passage", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 20),),
+              Text(
+                "ok",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20
+                ),
+              ),
               SizedBox(height: 10,),
               Text("Lyon Sport", style: TextStyle(color: Colors.white, fontSize: 15)),
               SizedBox(height: 7,),
@@ -63,12 +97,24 @@ class ReservationCard extends StatelessWidget {
                   Text("10.00", style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800)),
                   Row(
                     children: [
-                      incdecButton(color: secondaryBackgroundColor, text: "-"),
+                      incdecButton(color: secondaryBackgroundColor, text: "-", onPressed: (){
+                        setState(() {
+                          if(widget.reservation.reservedPlaces>0){
+                            widget.reservation.reservedPlaces--;
+                          }
+                        });
+                      }),
                       SizedBox(
                         width: 40,
-                          child: Text("0", style: TextStyle(color: Colors.white,fontSize: 16),textAlign: TextAlign.center,)
+                          child: Text( widget.reservation.reservedPlaces.toString(),
+                            style: TextStyle(color: Colors.white,fontSize: 16),textAlign: TextAlign.center,
+                          )
                       ),
-                      incdecButton(color: thirdBackgroundColor, text: "+"),
+                      incdecButton(color: thirdBackgroundColor, text: "+",onPressed:  (){
+                        setState(() {
+                          widget.reservation.reservedPlaces++;
+                        });
+                      }),
                     ],
                   ),
                 ],
@@ -80,3 +126,6 @@ class ReservationCard extends StatelessWidget {
     );
   }
 }
+
+
+

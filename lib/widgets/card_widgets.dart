@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wemove_test/constants/colors.dart';
 
-Widget incdecButton ({required Color color, required String text}){
+Widget incdecButton ({required Color color, required String text, required onPressed }){
   return SizedBox(
     width: 40,
     child: ElevatedButton(
@@ -9,7 +9,7 @@ Widget incdecButton ({required Color color, required String text}){
       style: ButtonStyle(
         backgroundColor:MaterialStateProperty.all(color),
       ),
-      onPressed: (){},
+      onPressed: onPressed,
     ),
   );
 }
