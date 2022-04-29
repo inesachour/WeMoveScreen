@@ -38,57 +38,6 @@ class _PanierScreenState extends State<PanierScreen> {
       ),
       body: Stack(
         children: [
-          Positioned(
-              bottom: 0,
-              child: Container(
-                height: height*0.11,
-                width: width,
-                decoration: BoxDecoration(
-                    color: secondaryBackgroundColor,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    )
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          Text("Total", style: TextStyle(color: Colors.white), textAlign: TextAlign.start,),
-                          RichText(
-                            text: TextSpan(
-                                text: total.toStringAsFixed(2),
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700),
-                                children: <TextSpan>[
-                                  TextSpan(text: 'DT',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 14),
-                                  )
-                                ]
-                            ),
-                          ),
-                        ],
-                      ),
-                      ElevatedButton(
-                        child: Text("Continuer"),
-                        onPressed: (){},
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(thirdBackgroundColor),
-                            fixedSize: MaterialStateProperty.all(Size(width*0.32,height*0.08)),
-                            shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)
-                            ))
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              )
-          ),
           Container(
             color: primaryBackgroundColor,
             child: Padding(
@@ -98,17 +47,17 @@ class _PanierScreenState extends State<PanierScreen> {
                   Expanded(
                     flex: 2,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                       child: Column(
                         children: [
-                          SizedBox(height: 10,),
+                          SizedBox(height: 8,),
                           SizedBox(
                               width: width,
                               child: Text(
                                 "Cette réservation n'est pas pour toi? Après avoir finalisé l'achat, tu pourras modifier le bénéficiaire de chaque accès en indiquant son nom.",
                                 textAlign: TextAlign.left,style: TextStyle(color: Colors.white,fontSize: 14),)
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(height: 8,),
                           SizedBox(
                               width: width,
                               child: InkWell(

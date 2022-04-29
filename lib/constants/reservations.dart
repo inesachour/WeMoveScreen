@@ -7,7 +7,7 @@ var reservations = [
   Reservation(
       title: "Cuisses Abdos Fessiers",
       place: "Lyon Sport",
-      price: 8.00,
+      price: 20.00,
       date: DateTime(17082000),
       reservedPlaces: 0,
       image: "assets/image.jpg"
@@ -15,7 +15,7 @@ var reservations = [
   Reservation(
       title: "Cuisses Fessiers",
       place: "Task Sport",
-      price: 8.00,
+      price: 10.00,
       date: DateTime(17082000),
       reservedPlaces: 0,
       image: "assets/image.jpg"
@@ -39,10 +39,12 @@ var reservations = [
   Reservation(
       title: "Cuisses Abdos Fessiers",
       place: "Lyon Sport",
-      price: 8.00,
+      price: 10.00,
       date: DateTime(17082000),
       reservedPlaces: 5,
-      image: "assets/image.jpg"
+      image: "assets/image.jpg",
+      heureDebut: "19:00",
+      heureFin: "23:00"
   ),
 ];
 
@@ -59,6 +61,8 @@ class Reservation extends ChangeNotifier{
     this.time,
     required this.reservedPlaces,
     required this.image,
+    this.heureDebut,
+    this.heureFin,
   });
 
   int id= _id++;
@@ -69,6 +73,8 @@ class Reservation extends ChangeNotifier{
   String? time;
   int reservedPlaces;
   String image;
+  String? heureDebut;
+  String? heureFin;
 
 }
 

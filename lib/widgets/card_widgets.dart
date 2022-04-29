@@ -13,3 +13,17 @@ Widget incdecButton ({required Color color, required String text, required onPre
     ),
   );
 }
+
+
+Widget DurationWidget({required String duree}){
+  return Row(
+    children: [
+      Icon(Icons.watch_later, color: Colors.white,),
+      SizedBox(width: 5,),
+      Text(
+          duree,
+          style: TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.w700)
+      ),
+    ],
+  );
+}

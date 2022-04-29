@@ -13,6 +13,7 @@ class ReservationCard extends StatefulWidget {
   var deleting;
   var updatingTotal;
 
+
   @override
   State<ReservationCard> createState() => _ReservationCardState();
 }
@@ -20,9 +21,16 @@ class ReservationCard extends StatefulWidget {
 class _ReservationCardState extends State<ReservationCard> {
 
   bool onDeleteClicked = false;
+  String? duree = null;
+
+
 
   @override
   Widget build(BuildContext context) {
+
+    if(widget.reservation.heureDebut != null && widget.reservation.heureFin != null){
+      duree = "De "+ widget.reservation.heureDebut! + " à "+ widget.reservation.heureFin!;
+    }
 
     initializeDateFormatting('fr');
     var date = widget.reservation.date;
@@ -96,7 +104,7 @@ class _ReservationCardState extends State<ReservationCard> {
               SizedBox(height: 10,),
               Text(widget.reservation.place, style: TextStyle(color: Colors.white, fontSize: 15)),
               SizedBox(height: 7,),
-              Text("de 1h à 7h", style: TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.w700)),
+              duree != null ? DurationWidget(duree: duree!): SizedBox(),
               SizedBox(height: 7,),
               Text("Places réservés: "+widget.reservation.reservedPlaces.toString(), style: TextStyle(color: Colors.white, fontSize: 15)),
               SizedBox(height: 20,),
