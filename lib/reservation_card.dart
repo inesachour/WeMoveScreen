@@ -60,8 +60,8 @@ class _ReservationCardState extends State<ReservationCard> {
 
                   //Displaying Date
                   Container(
-                      height: 60,
-                      width: 75,
+                      height: 62,
+                      width: 80,
                       decoration: BoxDecoration(
                           color: thirdBackgroundColor,
                           borderRadius: BorderRadius.circular(10)
@@ -147,9 +147,14 @@ class _ReservationCardState extends State<ReservationCard> {
                       //Decrement Button
                       incdecButton(color: secondaryBackgroundColor, text: "-", onPressed: (){
                         setState(() {
+
+                          print("ok");
                           if(widget.reservation.reservedPlaces>0){
                             widget.reservation.reservedPlaces--;
                             widget.updatingTotal();
+                          }
+                          else if(widget.reservation.reservedPlaces==0){
+                            widget.deleting;
                           }
                         });
                       }),
