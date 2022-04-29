@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+
 var reservations = [
   Reservation(
       title: "Cuisses Abdos Fessiers",
@@ -68,5 +69,8 @@ class Reservation extends ChangeNotifier{
   String? time;
   int reservedPlaces;
   String image;
+
 }
+
+
 

@@ -38,6 +38,57 @@ class _PanierScreenState extends State<PanierScreen> {
       ),
       body: Stack(
         children: [
+          Positioned(
+              bottom: 0,
+              child: Container(
+                height: height*0.11,
+                width: width,
+                decoration: BoxDecoration(
+                    color: secondaryBackgroundColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    )
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          Text("Total", style: TextStyle(color: Colors.white), textAlign: TextAlign.start,),
+                          RichText(
+                            text: TextSpan(
+                                text: total.toStringAsFixed(2),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700),
+                                children: <TextSpan>[
+                                  TextSpan(text: 'DT',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 14),
+                                  )
+                                ]
+                            ),
+                          ),
+                        ],
+                      ),
+                      ElevatedButton(
+                        child: Text("Continuer"),
+                        onPressed: (){},
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(thirdBackgroundColor),
+                            fixedSize: MaterialStateProperty.all(Size(width*0.32,height*0.08)),
+                            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)
+                            ))
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
+          ),
           Container(
             color: primaryBackgroundColor,
             child: Padding(
@@ -45,7 +96,7 @@ class _PanierScreenState extends State<PanierScreen> {
               child: Column(
                 children: [
                   Expanded(
-                    flex: 1,
+                    flex: 2,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       child: Column(
@@ -79,18 +130,18 @@ class _PanierScreenState extends State<PanierScreen> {
                   ),
 
                   Expanded(
-                    flex: 4,
+                    flex: 7,
                     child: reservations.length > 0 ? ListView.builder(
                         scrollDirection: Axis.vertical,
                         itemCount: reservations.length,
                         itemBuilder: (context, index){
                           return Dismissible(
                             key: Key(reservations[index].id.toString()),
-                            child: ReservationCard(reservation: reservations[index],deleting: (){
-                              setState(() {
-                                reservations.removeAt(index);
-                              });
-                            },),
+                            child: ReservationCard(
+                              reservation: reservations[index],
+                              deleting: (){setState(() {reservations.removeAt(index);});},
+                              updatingTotal: (){setState(() { total = calculateTotal(reservations); });},
+                            ),
                             onDismissed: (direction) {
                               setState(() {
                                 reservations.removeAt(index);
@@ -103,9 +154,9 @@ class _PanierScreenState extends State<PanierScreen> {
                             child: Text("Pas encore d'endorphines par ici",
                               style: TextStyle(color: Colors.white, fontSize: 18),)
                         )
-                    )
-                    ,
+                    ),
                   ),
+                  SizedBox(height: height*0.11,),
                 ],
               ),
             ),
@@ -132,7 +183,7 @@ class _PanierScreenState extends State<PanierScreen> {
                           Text("Total", style: TextStyle(color: Colors.white), textAlign: TextAlign.start,),
                           RichText(
                             text: TextSpan(
-                                text: total.toString(),
+                                text: total.toStringAsFixed(2),
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700),
                                 children: <TextSpan>[

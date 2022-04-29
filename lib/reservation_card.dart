@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:wemove_test/constants/colors.dart';
 import 'package:wemove_test/constants/reservations.dart';
@@ -6,10 +7,11 @@ import 'package:wemove_test/widgets/card_widgets.dart';
 
 class ReservationCard extends StatefulWidget {
 
-  ReservationCard({required this.reservation , required this.deleting});
+  ReservationCard({required this.reservation , required this.deleting, required this.updatingTotal});
 
   Reservation reservation;
   var deleting;
+  var updatingTotal;
 
   @override
   State<ReservationCard> createState() => _ReservationCardState();
@@ -22,6 +24,7 @@ class _ReservationCardState extends State<ReservationCard> {
   @override
   Widget build(BuildContext context) {
 
+    initializeDateFormatting('fr');
     var date = widget.reservation.date;
     var jour = capitalize(DateFormat('EEE dd',"FR-fr").format(date).replaceAll('.', ''));
     var mois = capitalize(DateFormat('MMM',"fr").format(date).replaceAll('.', ''));
@@ -39,7 +42,7 @@ class _ReservationCardState extends State<ReservationCard> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -47,7 +50,7 @@ class _ReservationCardState extends State<ReservationCard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                      height: 50,
+                      height: 60,
                       width: 75,
                       decoration: BoxDecoration(
                           color: thirdBackgroundColor,
@@ -100,13 +103,14 @@ class _ReservationCardState extends State<ReservationCard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(widget.reservation.price.toString(), style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800)),
+                  Text(widget.reservation.price.toStringAsFixed(2), style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800)),
                   Row(
                     children: [
                       incdecButton(color: secondaryBackgroundColor, text: "-", onPressed: (){
                         setState(() {
                           if(widget.reservation.reservedPlaces>0){
                             widget.reservation.reservedPlaces--;
+                            widget.updatingTotal();
                           }
                         });
                       }),
@@ -119,6 +123,7 @@ class _ReservationCardState extends State<ReservationCard> {
                       incdecButton(color: thirdBackgroundColor, text: "+",onPressed:  (){
                         setState(() {
                           widget.reservation.reservedPlaces++;
+                          widget.updatingTotal();
                         });
                       }),
                     ],
