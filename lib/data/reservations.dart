@@ -9,7 +9,9 @@ var reservations = [
       price: 10,
       date: DateTime.now(),
       reservedPlaces: 1,
-      image: "assets/images/cardio.jpg"
+      image: "assets/images/cardio.jpg",
+      heureDebut: "14:00",
+      heureFin: "15:00"
   ),
   Reservation(
       title: "Musculation",
@@ -28,14 +30,14 @@ var reservations = [
       image: "assets/images/spinning.jpg"
   ),
   Reservation(
-      title: "Zumba",
+      title: "Body Pump",
       place: "Gym Box",
       price: 10,
       date: DateTime(2022,4,29),
       reservedPlaces: 1,
-      image: "assets/images/zumba.jpg",
+      image: "assets/images/bodypump.jpg",
       heureDebut: "19:00",
-      heureFin: "23:00"
+      heureFin: "21:00"
   ),
 ];
 

@@ -80,7 +80,7 @@ class _ReservationCardState extends State<ReservationCard> {
                   Row(
                     children: [
                       InkWell(
-                          child: Icon(Icons.delete, color: onDeleteClicked ? Colors.red :Colors.white,),
+                          child: Icon(Icons.delete, color: onDeleteClicked ? Colors.red :Colors.white,size: 30,),
                           onTap: (){
                             setState(() {
                               onDeleteClicked = !onDeleteClicked;
@@ -148,14 +148,14 @@ class _ReservationCardState extends State<ReservationCard> {
                       incdecButton(color: secondaryBackgroundColor, text: "-", onPressed: (){
                         setState(() {
 
-                          print("ok");
                           if(widget.reservation.reservedPlaces>0){
                             widget.reservation.reservedPlaces--;
                             widget.updatingTotal();
                           }
-                          else if(widget.reservation.reservedPlaces==0){
-                            widget.deleting;
+                          if(widget.reservation.reservedPlaces==0){
+                            widget.deleting();
                           }
+
                         });
                       }),
 

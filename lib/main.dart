@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wemove_test/panier_screen.dart';
+import 'package:wemove_test/screens/panier_screen.dart';
 
 void main() {
   runApp(const MyApp());
