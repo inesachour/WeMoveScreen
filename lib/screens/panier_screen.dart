@@ -30,7 +30,12 @@ class _PanierScreenState extends State<PanierScreen> {
         title: Text("Mon panier", style: TextStyle(fontWeight: FontWeight.w700),),
         leading: Container(
           margin: EdgeInsets.all(5),
-          child: Icon(Icons.arrow_back),
+          child: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: (){
+                Navigator.pop(context);
+              },
+          ),
           decoration: BoxDecoration(
             color: secondaryBackgroundColor,
             borderRadius: BorderRadius.circular(10)

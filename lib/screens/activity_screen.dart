@@ -23,20 +23,77 @@ class _ActivityScreenState extends State<ActivityScreen> {
                 child: Column(
                   children: [
                     Expanded(
-                      flex: 3,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                            image: AssetImage("assets/images/activity/9Z6IJiAkLOGqmWA5psXv.jpg"),
-                            fit: BoxFit.cover,
+                      flex: 2,
+                      child: Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage("assets/images/activity/9Z6IJiAkLOGqmWA5psXv.jpg"),
+                                opacity: 0.75,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
-                        ),
+                          Positioned(
+                            top: 100,
+                            width: MediaQuery.of(context).size.width,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Activity Name", style: TextStyle(color: Colors.white,fontSize: 22,fontWeight: FontWeight.bold),),
+                                  Text("Description Name", style: TextStyle(color: Colors.white, fontSize: 16 ,fontWeight: FontWeight.w400),),
+
+                                  SizedBox(height: 10,),
+
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Icon(Icons.check, color: Colors.white,),
+                                                SizedBox(width: 5,),
+                                                Text("text1",style: TextStyle(color: Colors.white))
+                                              ],
+                                            ),
+
+                                            Row(
+                                              children: [
+                                                Icon(Icons.close, color: Colors.white,),
+                                                SizedBox(width: 5,),
+                                                Text("text2",style: TextStyle(color: Colors.white))
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.check, color: Colors.white,),
+                                            SizedBox(width: 5,),
+                                            Text("text1",style: TextStyle(color: Colors.white))
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
 
                     Expanded(
-                      flex: 5,
+                      flex: 3,
                       child: ListView.builder(
                           itemCount: 2,
                           itemBuilder: (context,index){

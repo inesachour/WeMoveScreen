@@ -71,14 +71,16 @@ class _ActivityInfoCardState extends State<ActivityInfoCard> {
 
                     SizedBox(height: 3,),
 
-                    DurationWidget(duree: "De 9h à 10h"),
+                    DurationWidget(start: "9", end: "10"),
 
                   ],
                 ),
 
                 ElevatedButton(
                   child: Text("Réserver"),
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => PanierScreen()));
+                  },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(thirdBackgroundColor),
                     fixedSize: MaterialStateProperty.all(Size(MediaQuery.of(context).size.width*0.32,MediaQuery.of(context).size.height*0.08)),

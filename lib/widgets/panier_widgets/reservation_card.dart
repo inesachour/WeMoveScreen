@@ -22,14 +22,17 @@ class ReservationCard extends StatefulWidget {
 class _ReservationCardState extends State<ReservationCard> {
 
   bool onDeleteClicked = false;
-  String? duree = null;
+  String? start = null;
+  String? end = null;
 
 
   @override
   Widget build(BuildContext context) {
 
     if(widget.reservation.heureDebut != null && widget.reservation.heureFin != null){
-      duree = "De "+ widget.reservation.heureDebut! + " à "+ widget.reservation.heureFin!;
+    //  duree = "De "+ widget.reservation.heureDebut! + " à "+ widget.reservation.heureFin!;
+      start = widget.reservation.heureDebut!;
+      end = widget.reservation.heureFin!;
     }
 
     //Duration Time formatting to french
@@ -119,7 +122,7 @@ class _ReservationCardState extends State<ReservationCard> {
 
 
               //Displaying duration if exists
-              duree != null ? DurationWidget(duree: duree!): SizedBox(),
+              start != null && end != null ? DurationWidget(start: start!, end: end!): SizedBox(),
               SizedBox(height: 7,),
 
 

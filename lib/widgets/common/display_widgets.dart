@@ -1,13 +1,13 @@
 
 import 'package:flutter/material.dart';
 
-Widget DurationWidget({required String duree}){
+Widget DurationWidget({required String start,required String end}){
   return Row(
     children: [
       Icon(Icons.watch_later, color: Colors.white,),
       SizedBox(width: 5,),
       Text(
-          duree,
+          "De $start à $end",
           style: TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.w700)
       ),
     ],
