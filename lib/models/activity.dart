@@ -32,8 +32,8 @@ class Activity {
   int accessibility;
   DateTime? deletedAt;
   ActivityType activityType;
-  List<ActivityType> recommendations;
-  List<ActivityType> idealFor;
+  List<Recommendation> recommendations;
+  List<Recommendation> idealFor;
 
   factory Activity.fromJson(Map<String, dynamic> json) => Activity(
     id: json["id"],
@@ -47,8 +47,8 @@ class Activity {
     accessibility: json["accessibility"],
     deletedAt: json["deleted_at"],
     activityType: ActivityType.fromJson(json["activity_type"]),
-    recommendations: List<ActivityType>.from(json["recommendations"].map((x) => ActivityType.fromJson(x))),
-    idealFor: List<ActivityType>.from(json["ideal_for"].map((x) => ActivityType.fromJson(x))),
+    recommendations: List<Recommendation>.from(json["recommendations"].map((x) => Recommendation.fromJson(x))),
+    idealFor: List<Recommendation>.from(json["ideal_for"].map((x) => Recommendation.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -95,6 +95,35 @@ class ActivityType {
     "id": id,
     "label": label,
     "description": description == null ? null : description,
+    "created_at": createdAt.toIso8601String(),
+    "updated_at": updatedAt.toIso8601String(),
+  };
+}
+
+
+class Recommendation {
+  Recommendation({
+    required this.id,
+    required this.label,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  String id;
+  String label;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  factory Recommendation.fromJson(Map<String, dynamic> json) => Recommendation(
+    id: json["id"],
+    label: json["label"],
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: DateTime.parse(json["updated_at"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "label": label,
     "created_at": createdAt.toIso8601String(),
     "updated_at": updatedAt.toIso8601String(),
   };

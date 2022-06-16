@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wemove_test/constants/colors.dart';
+import 'package:wemove_test/services/activities_service.dart';
 import 'package:wemove_test/widgets/activity_widgets/activity_info_card.dart';
 import 'package:wemove_test/widgets/activity_widgets/activity_widgets.dart';
 
@@ -13,6 +14,10 @@ class ActivityScreen extends StatefulWidget {
 class _ActivityScreenState extends State<ActivityScreen> {
   @override
   Widget build(BuildContext context) {
+    print("ok");
+    debugPrint("ooo");
+    ActivitiesService.getActivity();
+
     return Scaffold(
       backgroundColor: secondaryBackgroundColor,
       body: SafeArea(
