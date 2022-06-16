@@ -1,0 +1,151 @@
+ {"partners": [
+{
+        "id": "f0ad1f0e-2954-4785-a355-e525941192fc",
+        "name": "Titans Team",
+        "description": "Boxe",
+        "phone_1": "23663054",
+        "phone_2": null,
+        "email": "titansarfeoui@gmail.com",
+        "logo": "partners/aAVxq1fV3vFyRPjsvs9T.png",
+        "image_1": "partners/E8cA1fvLPURm50gdQBiz.jpg",
+        "image_2": "partners/0LalCYiMv98LKUSMCOJ8.jpg",
+        "image_3": null,
+        "email_verified_at": "2021-04-16 09:47:24",
+        "partner_type_id": "94a754e8-ff7d-4a53-9a5d-76ed01d660d4",
+        "created_at": "2021-04-16T08:47:24.000000Z",
+        "updated_at": "2021-09-17T14:43:44.000000Z",
+        "percentage_nomad": 20,
+        "percentage_company": 20,
+        "deleted_at": null,
+        "not_archived": 1,
+        "administrator_id": null,
+        "pass_price": 5,
+       
+        "partner_type": {
+            "id": "94a754e8-ff7d-4a53-9a5d-76ed01d660d4",
+            "label": "Salle de Sport",
+            "created_at": "2021-04-14T20:58:03.000000Z",
+            "updated_at": "2021-04-14T20:58:03.000000Z"
+        },
+        "geo_zone": {
+            "id": "47c277f7-1b1d-4836-ab37-18197802e47c",
+            "latitude": 36.8416286,
+            "longitude": 10.1558552,
+            "geo_zoneable_type": "App\\Partner",
+            "geo_zoneable_id": "f0ad1f0e-2954-4785-a355-e525941192fc",
+            "address": "Rue Tahar Sfar",
+            "zip_code": 2092,
+            "city": "Tunis",
+            "geo_zone_label_id": "16a2dcdc-759d-4d47-bbe0-7eb76a5f13dc",
+            "created_at": "2022-04-30T21:34:16.000000Z",
+            "updated_at": "2022-04-30T21:34:16.000000Z",
+            "geo_zone_label": {
+                "id": "16a2dcdc-759d-4d47-bbe0-7eb76a5f13dc",
+                "label": "Tunis Menzah",
+                "created_at": "2021-04-16T08:47:24.000000Z",
+                "updated_at": "2022-02-02T11:05:06.000000Z",
+                "deleted_at": null
+            }
+        }
+    },
+ {
+        "id": "ede8e3bf-a3e8-40a2-8cd9-fa5780fcac19",
+        "name": "GymPark",
+        "description": "Description not necessary",
+        "phone_1": "29800819",
+        "phone_2": null,
+        "email": "gym.park.tn@gmail.com",
+        "logo": "partners/6723suNIxH2F1aZVnMSS.png",
+        "image_1": "partners/TiK00td9F0qmZtukjwcC.jpg",
+        "image_2": "partners/ggcuhYMXp5x54U4OQKJc.jpg",
+        "image_3": null,
+        "email_verified_at": "2021-04-16 09:47:28",
+        "partner_type_id": "94a754e8-ff7d-4a53-9a5d-76ed01d660d4",
+        "created_at": "2021-04-16T08:47:28.000000Z",
+        "updated_at": "2021-09-17T14:43:44.000000Z",
+        "percentage_nomad": 20,
+        "percentage_company": 0,
+        "deleted_at": null,
+        "not_archived": 1,
+        "administrator_id": null,
+        "pass_price": 5,
+      
+        "partner_type": {
+            "id": "94a754e8-ff7d-4a53-9a5d-76ed01d660d4",
+            "label": "Salle de Sport",
+            "created_at": "2021-04-14T20:58:03.000000Z",
+            "updated_at": "2021-04-14T20:58:03.000000Z"
+        },
+        "geo_zone": {
+            "id": "63f265d7-1433-4ed0-b55b-fae0b7fac24f",
+            "latitude": 36.7370593,
+            "longitude": 10.2995468,
+            "geo_zoneable_type": "App\\Partner",
+            "geo_zoneable_id": "ede8e3bf-a3e8-40a2-8cd9-fa5780fcac19",
+            "address": "Av. Habib Bourguiba",
+            "zip_code": 2034,
+            "city": "Ezzahra",
+            "geo_zone_label_id": "86838fca-5bd3-4c86-a0d3-f3296ec66278",
+            "created_at": "2022-05-04T11:56:23.000000Z",
+            "updated_at": "2022-05-04T11:56:23.000000Z",
+            "geo_zone_label": {
+                "id": "86838fca-5bd3-4c86-a0d3-f3296ec66278",
+                "label": "Tunis Sud",
+                "created_at": "2021-04-16T08:47:29.000000Z",
+                "updated_at": "2022-02-02T11:14:04.000000Z",
+                "deleted_at": null
+            }
+        }
+    },
+{
+        "id": "53f699aa-124a-4e80-8b86-113c72918386",
+        "name": "RedSquare",
+        "description": "Description not necessary",
+        "phone_1": "71583517",
+        "phone_2": "20154258",
+        "email": "contact@redsquare.tn",
+        "logo": "partners/bkY5F2FqENkjs4ButaUL.jpg",
+        "image_1": "partners/TS27xVuOQN4aVsMLMGZk.jpg",
+        "image_2": "partners/639j2RQdh2O0CqbJIcxm.jpg",
+        "image_3": null,
+        "email_verified_at": "2021-04-16 09:47:27",
+        "partner_type_id": "94a754e8-ff7d-4a53-9a5d-76ed01d660d4",
+        "created_at": "2021-04-16T08:47:27.000000Z",
+        "updated_at": "2021-09-17T14:43:43.000000Z",
+        "percentage_nomad": 20,
+        "percentage_company": 20,
+        "deleted_at": null,
+        "not_archived": 1,
+        "administrator_id": null,
+        "pass_price": 5,
+       
+        "partner_type": {
+            "id": "94a754e8-ff7d-4a53-9a5d-76ed01d660d4",
+            "label": "Salle de Sport",
+            "created_at": "2021-04-14T20:58:03.000000Z",
+            "updated_at": "2021-04-14T20:58:03.000000Z"
+        },
+        "geo_zone": {
+            "id": "09702bcf-36ed-4f3d-b5e3-cf5c67bcc9f1",
+            "latitude": 36.8073092,
+            "longitude": 10.1211207,
+            "geo_zoneable_type": "App\\Partner",
+            "geo_zoneable_id": "53f699aa-124a-4e80-8b86-113c72918386",
+            "address": "1 Rue de l'Astre",
+            "zip_code": 2000,
+            "city": "Tunis",
+            "geo_zone_label_id": "7fdd753a-e840-4500-8493-221d916f3eaf",
+            "created_at": "2022-06-13T15:11:58.000000Z",
+            "updated_at": "2022-06-13T15:11:58.000000Z",
+            "geo_zone_label": {
+                "id": "7fdd753a-e840-4500-8493-221d916f3eaf",
+                "label": "Khaznadar",
+                "created_at": "2021-04-16T08:47:27.000000Z",
+                "updated_at": "2021-04-16T08:47:27.000000Z",
+                "deleted_at": null
+            }
+        }
+    }
+
+]
+}

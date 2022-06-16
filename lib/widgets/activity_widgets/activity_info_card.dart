@@ -3,7 +3,6 @@ import 'package:wemove_test/screens/panier_screen.dart';
 import 'package:wemove_test/widgets/common/display_widgets.dart';
 
 import '../../constants/colors.dart';
-import '../panier_widgets/displaying_widgets.dart';
 
 class ActivityInfoCard extends StatefulWidget {
   const ActivityInfoCard({Key? key}) : super(key: key);
