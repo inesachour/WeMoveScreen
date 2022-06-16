@@ -135,7 +135,7 @@ class GeoZone {
   String geoZoneLabelId;
   DateTime createdAt;
   DateTime updatedAt;
-  PartnerType geoZoneLabel;
+  GeoZoneLabel geoZoneLabel;
 
   factory GeoZone.fromJson(Map<String, dynamic> json) => GeoZone(
     id: json["id"],
@@ -149,7 +149,7 @@ class GeoZone {
     geoZoneLabelId: json["geo_zone_label_id"],
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
-    geoZoneLabel: PartnerType.fromJson(json["geo_zone_label"]),
+    geoZoneLabel: GeoZoneLabel.fromJson(json["geo_zone_label"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -184,6 +184,38 @@ class PartnerType {
   DateTime? deletedAt;
 
   factory PartnerType.fromJson(Map<String, dynamic> json) => PartnerType(
+    id: json["id"],
+    label: json["label"],
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: DateTime.parse(json["updated_at"]),
+    deletedAt: json["deleted_at"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "label": label,
+    "created_at": createdAt.toIso8601String(),
+    "updated_at": updatedAt.toIso8601String(),
+    "deleted_at": deletedAt,
+  };
+}
+
+class GeoZoneLabel {
+  GeoZoneLabel({
+    required this.id,
+    required this.label,
+    required this.createdAt,
+    required this.updatedAt,
+    this.deletedAt,
+  });
+
+  String id;
+  String label;
+  DateTime createdAt;
+  DateTime updatedAt;
+  DateTime? deletedAt;
+
+  factory GeoZoneLabel.fromJson(Map<String, dynamic> json) => GeoZoneLabel(
     id: json["id"],
     label: json["label"],
     createdAt: DateTime.parse(json["created_at"]),
