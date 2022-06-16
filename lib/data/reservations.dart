@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 var reservations = [
@@ -70,6 +68,3 @@ class Reservation extends ChangeNotifier{
   String? heureFin;
 
 }
-
-
-

@@ -8,10 +8,9 @@ class ActivitiesService{
 
   static String activitiesUrl = "https://pastebin.com/raw/hwz5ffrg";
 
-  static getActivity() async{
+  static Future<Activity?> getActivity() async{
     try{
       var url = Uri.parse(activitiesUrl);
-      print("test1");
       var response = await http.get(url);
       Activity activity = Activity.fromJson(json.decode(response.body));
       return activity;
@@ -19,7 +18,5 @@ class ActivitiesService{
     catch(e){
       print(e);
     }
-
-
   }
 }

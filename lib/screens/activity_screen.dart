@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wemove_test/constants/colors.dart';
+import 'package:wemove_test/models/activity.dart';
 import 'package:wemove_test/services/activities_service.dart';
+import 'package:wemove_test/services/courses_service.dart';
 import 'package:wemove_test/widgets/activity_widgets/activity_info_card.dart';
 import 'package:wemove_test/widgets/activity_widgets/activity_widgets.dart';
 
@@ -12,16 +14,25 @@ class ActivityScreen extends StatefulWidget {
 }
 
 class _ActivityScreenState extends State<ActivityScreen> {
+  Future<Activity?> activityFuture = ActivitiesService.getActivity();
+  Activity? activity;
+
+
   @override
   Widget build(BuildContext context) {
-    print("ok");
-    debugPrint("ooo");
-    ActivitiesService.getActivity();
+
+    CoursesService.getCourses();
+
+    activityFuture.then((value) {
+      setState(() {
+        activity = value;
+      });
+    });
 
     return Scaffold(
       backgroundColor: secondaryBackgroundColor,
       body: SafeArea(
-        child: Stack(
+        child: activity != null ? Stack(
           children: [
             SingleChildScrollView(
               child: SizedBox(
@@ -49,8 +60,8 @@ class _ActivityScreenState extends State<ActivityScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Activity Name", style: TextStyle(color: Colors.white,fontSize: 22,fontWeight: FontWeight.bold),),
-                                  Text("Description Name", style: TextStyle(color: Colors.white, fontSize: 16 ,fontWeight: FontWeight.w400),),
+                                  Text(activity!.name, style: TextStyle(color: Colors.white,fontSize: 22,fontWeight: FontWeight.bold),),
+                                  Text(activity!.description, style: TextStyle(color: Colors.white, fontSize: 16 ,fontWeight: FontWeight.w400),),
 
                                   SizedBox(height: 10,),
 
@@ -114,7 +125,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
             ),
             ActivityAppBarWidget(width: MediaQuery.of(context).size.width)
           ],
-        ),
+        ) : CircularProgressIndicator()
       ),
     );
   }

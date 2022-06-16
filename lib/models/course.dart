@@ -151,8 +151,8 @@ class CourseInfo {
   DateTime date;
   int stock;
   int level;
-  int nomadPrice;
-  int companyPrice;
+  int? nomadPrice;
+  int? companyPrice;
   String courseId;
   String planningId;
   dynamic coachId;
