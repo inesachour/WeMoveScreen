@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wemove_test/constants/colors.dart';
-import 'package:wemove_test/widgets/displaying_widgets.dart';
+import 'package:wemove_test/widgets/panier_widgets/displaying_widgets.dart';
 
 Widget BottomNavBar({required double height, required double width, required double total}){
   return Row(

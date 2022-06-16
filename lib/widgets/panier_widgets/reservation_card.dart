@@ -3,7 +3,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:wemove_test/constants/colors.dart';
 import 'package:wemove_test/data/reservations.dart';
-import 'package:wemove_test/widgets/displaying_widgets.dart';
+import 'package:wemove_test/widgets/panier_widgets/displaying_widgets.dart';
 
 class ReservationCard extends StatefulWidget {
 

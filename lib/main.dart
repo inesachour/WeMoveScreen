@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wemove_test/screens/activity_screen.dart';
 import 'package:wemove_test/screens/panier_screen.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'WeMove',
-      home: PanierScreen(),
+      home: ActivityScreen(),
     );
   }
 }
