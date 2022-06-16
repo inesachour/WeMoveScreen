@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:wemove_test/constants/colors.dart';
 import 'package:wemove_test/data/reservations.dart';
-import 'package:wemove_test/reservation_card.dart';
+import 'package:wemove_test/widgets/reservation_card.dart';
 import 'package:wemove_test/widgets/panier_widgets.dart';
 
 class PanierScreen extends StatefulWidget {
