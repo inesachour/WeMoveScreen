@@ -40,7 +40,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
                       child: ListView.builder(
                           itemCount: 2,
                           itemBuilder: (context,index){
-                            return CategoryInfoCard();
+                            return ActivityInfoCard();
                           }
 
                       ),

@@ -3,6 +3,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:wemove_test/constants/colors.dart';
 import 'package:wemove_test/data/reservations.dart';
+import 'package:wemove_test/widgets/common/display_widgets.dart';
 import 'package:wemove_test/widgets/panier_widgets/displaying_widgets.dart';
 
 class ReservationCard extends StatefulWidget {
@@ -132,7 +133,7 @@ class _ReservationCardState extends State<ReservationCard> {
                 children: [
 
                   //Displating price
-                  DisplayPrice(
+                  DisplayPriceWidget(
                       text: widget.reservation.price.toStringAsFixed(2),
                       fontWeight: FontWeight.w800,
                       fontSizeMainText: 22,
