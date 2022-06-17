@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:wemove_test/constants/colors.dart';
 import 'package:wemove_test/models/partner.dart';
 import 'package:wemove_test/models/reservation.dart';
+import 'package:wemove_test/services/dates_service.dart';
 import 'package:wemove_test/services/partners_service.dart';
 import 'package:wemove_test/view_models/cart_view.dart';
 import 'package:wemove_test/widgets/common/display_widgets.dart';
@@ -30,9 +31,11 @@ class _ReservationCardState extends State<ReservationCard> {
   Partner? partner;
 
 
+
   @override
   Widget build(BuildContext context) {
 
+    List<String> date = DatesService.getShortDate(widget.reservation.course.courseInfos[0].date);
     Future<Partner?> futurePartner = PartnersService.getPartnerById(widget.reservation.course.partnerId);
 
     getPartner()async{
@@ -45,18 +48,7 @@ class _ReservationCardState extends State<ReservationCard> {
 
     getPartner();
 
-    /*if(widget.reservation.heureDebut != null && widget.reservation.heureFin != null){
-    //  duree = "De "+ widget.reservation.heureDebut! + " à "+ widget.reservation.heureFin!;
-      start = widget.reservation.heureDebut!;
-      end = widget.reservation.heureFin!;
-    }*/
-    //TODO heure debut et fin
-
-    //Duration Time formatting to french
-    initializeDateFormatting('fr');
-    var date = widget.reservation.course.courseInfos[0].date;
-    var jour = capitalize(DateFormat('EEE dd',"FR-fr").format(date).replaceAll('.', ''));
-    var mois = capitalize(DateFormat('MMM',"fr").format(date).replaceAll('.', ''));
+    List<String> duration = DatesService.getTime(widget.reservation.course.courseInfos[0].date, widget.reservation.course.duration);
 
     return Card(
       shape: RoundedRectangleBorder(
@@ -90,8 +82,8 @@ class _ReservationCardState extends State<ReservationCard> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(jour, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 18),),
-                          Text(mois, style: TextStyle(color: Colors.white, fontSize: 16))
+                          Text(date[0], style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 18),),
+                          Text(date[1], style: TextStyle(color: Colors.white, fontSize: 16))
                         ],
                       )
                   ),
@@ -141,7 +133,7 @@ class _ReservationCardState extends State<ReservationCard> {
 
 
               //Displaying duration if exists
-              start != null && end != null ? DurationWidget(start: start!, end: end!): SizedBox(),
+              DurationWidget(start: duration[0], end: duration[1]),
               SizedBox(height: 7,),
 
 
@@ -208,8 +200,6 @@ class _ReservationCardState extends State<ReservationCard> {
     );
   }
 }
-
-String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
 
 
 

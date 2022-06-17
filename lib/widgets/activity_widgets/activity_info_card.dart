@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:wemove_test/models/course.dart';
 import 'package:wemove_test/models/partner.dart';
 import 'package:wemove_test/screens/panier_screen.dart';
+import 'package:wemove_test/services/dates_service.dart';
 import 'package:wemove_test/services/partners_service.dart';
 import 'package:wemove_test/view_models/cart_view.dart';
 import 'package:wemove_test/widgets/common/display_widgets.dart';
@@ -25,6 +26,9 @@ class _ActivityInfoCardState extends State<ActivityInfoCard> {
   @override
   Widget build(BuildContext context) {
 
+    List<String> duration = DatesService.getTime(widget.course.courseInfos[0].date, widget.course.duration);
+
+
     Future<Partner?> futurePartner = PartnersService.getPartnerById(widget.course.partnerId);
 
     getPartner()async{
@@ -36,6 +40,8 @@ class _ActivityInfoCardState extends State<ActivityInfoCard> {
     }
 
     getPartner();
+
+    List<String> date = DatesService.getLongDate(widget.course.courseInfos[0].date);
 
     return Card(
       color: primaryBackgroundColor,
@@ -87,13 +93,13 @@ class _ActivityInfoCardState extends State<ActivityInfoCard> {
                       children: [
                         Icon(Icons.calendar_month_sharp, color: Colors.white,),
                         SizedBox(width: 5,),
-                        Text(widget.course.courseInfos[0].date.toString(), style: TextStyle(color: Colors.white),)
+                        Text("${date[0]} le ${date[1]} ${date[2]}" , style: TextStyle(color: Colors.white),)
                       ],
                     ),
 
                     SizedBox(height: 3,),
 
-                    DurationWidget(start: "9", end: "10"),
+                    DurationWidget(start: duration[0], end: duration[1]),
 
                   ],
                 ),
