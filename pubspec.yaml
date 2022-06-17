@@ -58,7 +58,7 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/images/activity/
+    - assets/images/activities/
     - assets/images/partners/
 
   # The following line ensures that the Material Icons font is

@@ -82,7 +82,7 @@ class _PanierScreenState extends State<PanierScreen> {
                                     style: TextStyle(color: Colors.white, fontSize: 16,decoration: TextDecoration.underline)
                                 ),
                                 onTap: (){
-                                    cart.clearCart();
+                                  Provider.of<CartView>(context,listen: false).clearCart();
                                 },
                               ),
                           ),
@@ -100,17 +100,9 @@ class _PanierScreenState extends State<PanierScreen> {
                         itemBuilder: (context, index){
                           return Dismissible(
                             key: Key(cart.reservations[index].course.id.toString()),
-                            child: ReservationCard(
-                              reservation: cart.reservations[index],
-                              deleting: (){
-                                //TODO DELETING IDK
-                              },
-                              updatingTotal: (){
-                                //TODO UPDATING TOTAL
-                                },
-                            ),
+                            child: ReservationCard(reservation: cart.reservations[index],),
                             onDismissed: (direction) {
-                              //TODO DELETE RESERVATION
+                              Provider.of<CartView>(context).deleteReservation(reservation: cart.reservations[index]);
                             },
                           );
                         }
@@ -147,8 +139,8 @@ class _PanierScreenState extends State<PanierScreen> {
                   child: BottomNavBar(
                       height: height,
                       width: width,
-                      total: 0 //TODO
-                  ),
+                      total: cart.total //TODO
+                  )
                 ),
               )
           ),

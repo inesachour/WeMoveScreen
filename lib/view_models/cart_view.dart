@@ -14,15 +14,50 @@ class CartView extends ChangeNotifier{
   double get total => _total;
 
   addReservation({required Course course}){
-    _reservations.add(Reservation(course: course, reservedPlaces: 1));
+    bool inCart = false;
+    for(var r in _reservations){
+      if(r.course.id == course.id){
+        inCart = true;
+      }
+    }
+    if(inCart){
+      Reservation r = _reservations.firstWhere((element) => element.course.id == course.id);
+      r.reservedPlaces++;
+    }
+    else{
+      _reservations.add(Reservation(course: course, reservedPlaces: 1));
+    }
+    calculateTotal();
+  }
+
+  deleteReservation({required Reservation reservation}){
+    _reservations.removeWhere((element) => element.course.id == reservation.course.id);
     calculateTotal();
 
+  }
+
+  incrementReservationsPlaces({required Reservation reservation}){
+    _reservations.forEach((element) {
+      if(element.course.id == reservation.course.id){
+        element.reservedPlaces++;
+        calculateTotal();
+      }
+    });
+  }
+
+  decrementReservationsPlaces({required Reservation reservation}){
+    _reservations.forEach((element) {
+      if(element.course.id == reservation.course.id){
+        element.reservedPlaces--;
+        calculateTotal();
+      }
+    });
   }
 
   clearCart(){
     _reservations = [];
     _total =0;
-    notifyListeners();
+    calculateTotal();
   }
 
   calculateTotal(){
@@ -32,5 +67,6 @@ class CartView extends ChangeNotifier{
     }
     notifyListeners();
   }
+
 
 }

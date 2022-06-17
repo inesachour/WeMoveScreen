@@ -1,7 +1,9 @@
 
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wemove_test/constants/colors.dart';
+import 'package:wemove_test/view_models/cart_view.dart';
 
 Widget ActivityAppBarWidget({required double width}){
   return Positioned(
@@ -29,7 +31,11 @@ Widget ActivityAppBarWidget({required double width}){
             height: 50,
             child: Badge(
               child: Icon(Icons.shopping_cart_sharp, color: Colors.white,),
-              badgeContent: Text("0", style: TextStyle(color: Colors.white),),
+              badgeContent: Consumer<CartView>(
+                  builder: (context,cart,child){
+                    return Text(cart.reservations.length.toString(), style: TextStyle(color: Colors.white),);
+                  },
+              ),
               badgeColor: thirdBackgroundColor,
             ),
 

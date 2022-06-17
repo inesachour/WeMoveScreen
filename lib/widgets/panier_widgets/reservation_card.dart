@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:wemove_test/constants/colors.dart';
 import 'package:wemove_test/models/reservation.dart';
+import 'package:wemove_test/view_models/cart_view.dart';
 import 'package:wemove_test/widgets/common/display_widgets.dart';
 import 'package:wemove_test/widgets/panier_widgets/displaying_widgets.dart';
 
 class ReservationCard extends StatefulWidget {
 
-  ReservationCard({required this.reservation , required this.deleting, required this.updatingTotal});
+  ReservationCard({required this.reservation});
 
   Reservation reservation;
-  var deleting;
-  var updatingTotal;
 
 
   @override
@@ -50,8 +50,7 @@ class _ReservationCardState extends State<ReservationCard> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
-          //  image: AssetImage(widget.reservation.image),
-            image: AssetImage(""), //TODO
+            image: AssetImage("assets/images/${widget.reservation.course.activity.image1}"),
             fit: BoxFit.cover,
           ),
         ),
@@ -96,7 +95,9 @@ class _ReservationCardState extends State<ReservationCard> {
 
                       onDeleteClicked ? InkWell(
                           child: Text("Supprimer", style: TextStyle(color: Colors.red, fontSize: 16),),
-                          onTap: widget.deleting,
+                          onTap: (){
+                            Provider.of<CartView>(context,listen: false).deleteReservation(reservation: widget.reservation);
+                          },
 
                       ): SizedBox(),
                     ],
@@ -154,32 +155,30 @@ class _ReservationCardState extends State<ReservationCard> {
 
                       //Decrement Button
                       incdecButton(color: secondaryBackgroundColor, text: "-", onPressed: (){
-                        setState(() {
-
-                          if(widget.reservation.reservedPlaces>0){
-                            widget.reservation.reservedPlaces--;
-                            widget.updatingTotal();
-                          }
-                          if(widget.reservation.reservedPlaces==0){
-                            widget.deleting();
-                          }
-
-                        });
+                        if(widget.reservation.reservedPlaces>0){
+                          Provider.of<CartView>(context, listen: false).decrementReservationsPlaces(reservation: widget.reservation);
+                        }
+                        if(widget.reservation.reservedPlaces==0){
+                          Provider.of<CartView>(context, listen: false).deleteReservation(reservation: widget.reservation);
+                        }
                       }),
 
                       //Number of reserved places
                       SizedBox(
                         width: 40,
-                          child: Text( widget.reservation.reservedPlaces.toString(),
-                            style: TextStyle(color: Colors.white,fontSize: 16),textAlign: TextAlign.center,
+                          child: Consumer<CartView>(
+                            builder: (context,cart,child){
+                              return Text( cart.reservations.where((element) => element.course.id == widget.reservation.course.id).first.reservedPlaces.toString(),
+                                style: TextStyle(color: Colors.white,fontSize: 16),textAlign: TextAlign.center,
+                              );
+                            },
                           )
                       ),
 
                       //Increment Button
                       incdecButton(color: thirdBackgroundColor, text: "+",onPressed:  (){
                         setState(() {
-                          widget.reservation.reservedPlaces++;
-                          widget.updatingTotal();
+                          Provider.of<CartView>(context,listen: false).incrementReservationsPlaces(reservation: widget.reservation);
                         });
                       }),
                     ],

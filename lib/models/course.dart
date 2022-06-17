@@ -21,7 +21,7 @@ class Course {
     required this.excludeDaypass,
     required this.nomadPrice,
     required this.companyPrice,
- //   required this.activity,
+    required this.activity,
     required this.requirements,
     required this.courseInfos,
   });
@@ -37,7 +37,7 @@ class Course {
   int excludeDaypass;
   dynamic nomadPrice;
   dynamic companyPrice;
- // Activity activity;
+  CourseActivity activity;
   List<Requirement> requirements;
   List<CourseInfo> courseInfos;
 
@@ -53,7 +53,7 @@ class Course {
     excludeDaypass: json["exclude_daypass"],
     nomadPrice: json["nomad_price"],
     companyPrice: json["company_price"],
-  //  activity: Activity.fromJson(json["activity"]),
+    activity: CourseActivity.fromJson(json["activity"]),
     requirements: List<Requirement>.from(json["requirements"].map((x) => Requirement.fromJson(x))),
     courseInfos: List<CourseInfo>.from(json["course_infos"].map((x) => CourseInfo.fromJson(x))),
   );
@@ -76,8 +76,8 @@ class Course {
   };
 }
 
-/*class Activity {
-  Activity({
+class CourseActivity {
+  CourseActivity({
     required this.id,
     required this.name,
     required this.description,
@@ -101,7 +101,7 @@ class Course {
   int accessibility;
   DateTime? deletedAt;
 
-  factory Activity.fromJson(Map<String, dynamic> json) => Activity(
+  factory CourseActivity.fromJson(Map<String, dynamic> json) => CourseActivity(
     id: json["id"],
     name: json["name"],
     description: json["description"],
@@ -126,7 +126,7 @@ class Course {
     "accessibility": accessibility,
     "deleted_at": deletedAt,
   };
-}*/
+}
 
 class CourseInfo {
   CourseInfo({
