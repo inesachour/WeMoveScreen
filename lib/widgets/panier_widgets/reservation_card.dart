@@ -3,14 +3,16 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:wemove_test/constants/colors.dart';
+import 'package:wemove_test/models/partner.dart';
 import 'package:wemove_test/models/reservation.dart';
+import 'package:wemove_test/services/partners_service.dart';
 import 'package:wemove_test/view_models/cart_view.dart';
 import 'package:wemove_test/widgets/common/display_widgets.dart';
 import 'package:wemove_test/widgets/panier_widgets/displaying_widgets.dart';
 
 class ReservationCard extends StatefulWidget {
 
-  ReservationCard({required this.reservation});
+  ReservationCard({required this.reservation,});
 
   Reservation reservation;
 
@@ -25,9 +27,23 @@ class _ReservationCardState extends State<ReservationCard> {
   String? start = null;
   String? end = null;
 
+  Partner? partner;
+
 
   @override
   Widget build(BuildContext context) {
+
+    Future<Partner?> futurePartner = PartnersService.getPartnerById(widget.reservation.course.partnerId);
+
+    getPartner()async{
+      futurePartner.then((value) {
+        setState(() {
+          partner = value;
+        });
+      });
+    }
+
+    getPartner();
 
     /*if(widget.reservation.heureDebut != null && widget.reservation.heureFin != null){
     //  duree = "De "+ widget.reservation.heureDebut! + " à "+ widget.reservation.heureFin!;
@@ -120,7 +136,7 @@ class _ReservationCardState extends State<ReservationCard> {
 
 
               //Displaying place
-             // Text(widget.reservation.place, style: TextStyle(color: Colors.white, fontSize: 15)), //TODO
+              Text(partner != null ?partner!.name: "", style: TextStyle(color: Colors.white, fontSize: 15)), //TODO
               SizedBox(height: 7,),
 
 

@@ -56,7 +56,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
                           Container(
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage("assets/images/activities/9Z6IJiAkLOGqmWA5psXv.jpg"), //TODO DYNAMIC
+                                image: AssetImage("assets/images/${activity!.image1}"),
                                 opacity: 0.75,
                                 fit: BoxFit.cover,
                               ),

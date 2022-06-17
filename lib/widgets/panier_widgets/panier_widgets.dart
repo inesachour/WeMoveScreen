@@ -5,7 +5,7 @@ import 'package:wemove_test/view_models/cart_view.dart';
 import 'package:wemove_test/widgets/common/display_widgets.dart';
 import 'package:wemove_test/widgets/panier_widgets/displaying_widgets.dart';
 
-Widget BottomNavBar({required double height, required double width, required double total}){
+Widget BottomNavBar({required double height, required double width}){
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -21,7 +21,7 @@ Widget BottomNavBar({required double height, required double width, required dou
           Consumer<CartView>(
           builder: (context,cart,child){
             return DisplayPriceWidget(
-                text: total.toStringAsFixed(2),
+                text: cart.total.toStringAsFixed(2),
                 fontWeight: FontWeight.w700,
                 fontSizeMainText: 24,
                 fontSizeCurrency: 14

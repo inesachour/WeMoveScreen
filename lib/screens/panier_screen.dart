@@ -100,9 +100,11 @@ class _PanierScreenState extends State<PanierScreen> {
                         itemBuilder: (context, index){
                           return Dismissible(
                             key: Key(cart.reservations[index].course.id.toString()),
-                            child: ReservationCard(reservation: cart.reservations[index],),
+                            child: ReservationCard(
+                              reservation: cart.reservations[index],
+                            ),
                             onDismissed: (direction) {
-                              Provider.of<CartView>(context).deleteReservation(reservation: cart.reservations[index]);
+                              Provider.of<CartView>(context, listen: false).deleteReservation(reservation: cart.reservations[index]);
                             },
                           );
                         }
@@ -139,7 +141,6 @@ class _PanierScreenState extends State<PanierScreen> {
                   child: BottomNavBar(
                       height: height,
                       width: width,
-                      total: cart.total //TODO
                   )
                 ),
               )
