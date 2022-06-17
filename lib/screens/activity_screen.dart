@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wemove_test/constants/colors.dart';
 import 'package:wemove_test/models/activity.dart';
+import 'package:wemove_test/models/course.dart';
 import 'package:wemove_test/services/activities_service.dart';
 import 'package:wemove_test/services/courses_service.dart';
 import 'package:wemove_test/widgets/activity_widgets/activity_info_card.dart';
@@ -15,19 +16,28 @@ class ActivityScreen extends StatefulWidget {
 
 class _ActivityScreenState extends State<ActivityScreen> {
   Future<Activity?> activityFuture = ActivitiesService.getActivity();
+  Future<List<Course>?> coursesFuture = CoursesService.getCourses();
+
   Activity? activity;
+  List<Course>? courses;
 
-
-  @override
-  Widget build(BuildContext context) {
-
-    CoursesService.getCourses();
-
+  Future getData() async{
     activityFuture.then((value) {
       setState(() {
         activity = value;
       });
     });
+    coursesFuture.then((value) {
+      setState(() {
+        courses = value;
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    getData();
 
     return Scaffold(
       backgroundColor: secondaryBackgroundColor,
@@ -112,9 +122,10 @@ class _ActivityScreenState extends State<ActivityScreen> {
                     Expanded(
                       flex: 3,
                       child: ListView.builder(
-                          itemCount: 2,
+                          itemCount: courses!.length,
                           itemBuilder: (context,index){
-                            return ActivityInfoCard();
+                            CourseInfo courseInfos = courses![index].courseInfos[0];
+                            return ActivityInfoCard(name: courseInfos.title,);
                           }
 
                       ),

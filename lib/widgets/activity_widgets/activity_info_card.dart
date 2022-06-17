@@ -5,7 +5,9 @@ import 'package:wemove_test/widgets/common/display_widgets.dart';
 import '../../constants/colors.dart';
 
 class ActivityInfoCard extends StatefulWidget {
-  const ActivityInfoCard({Key? key}) : super(key: key);
+  ActivityInfoCard({required this.name});
+
+  String name;
 
   @override
   _ActivityInfoCardState createState() => _ActivityInfoCardState();
@@ -41,7 +43,7 @@ class _ActivityInfoCardState extends State<ActivityInfoCard> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Cours Name",style: TextStyle(color: Colors.white),),
+                        Text(widget.name,style: TextStyle(color: Colors.white),),
                         Text("Partenaire Name",style: TextStyle(color: Colors.white)),
                         Text("Zone",style: TextStyle(color: Colors.white))
                       ],
