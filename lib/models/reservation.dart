@@ -1,28 +1,13 @@
+import 'package:wemove_test/models/course.dart';
+
 class Reservation{
 
-  static var _id = 0;
-
   Reservation({
-    required this.title,
-    required this.place,
-    required this.price,
-    required this.date,
-    this.time,
-    required this.reservedPlaces,
-    required this.image,
-    this.heureDebut,
-    this.heureFin,
+    required this.course,
+    required this.reservedPlaces
   });
 
-  int id= _id++;
-  String title;
-  String place;
-  double price;
-  DateTime date;
-  String? time;
+  Course course;
   int reservedPlaces;
-  String image;
-  String? heureDebut;
-  String? heureFin;
 
 }

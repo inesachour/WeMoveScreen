@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wemove_test/screens/activity_screen.dart';
-import 'package:http/http.dart' as http;
+import 'package:wemove_test/view_models/cart_view.dart';
 
 
 class MyHttpOverrides extends HttpOverrides{
@@ -15,7 +16,12 @@ class MyHttpOverrides extends HttpOverrides{
 
 void main() {
   HttpOverrides.global = new MyHttpOverrides();
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => CartView(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

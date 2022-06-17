@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
 import 'package:wemove_test/constants/colors.dart';
-import 'package:wemove_test/data/reservations.dart';
+import 'package:wemove_test/models/reservation.dart';
+import 'package:wemove_test/view_models/cart_view.dart';
 import 'package:wemove_test/widgets/panier_widgets/panier_widgets.dart';
 import 'package:wemove_test/widgets/panier_widgets/reservation_card.dart';
 
@@ -20,8 +22,8 @@ class _PanierScreenState extends State<PanierScreen> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
-    var total = calculateTotal(reservations);
 
+    CartView cart = Provider.of<CartView>(context);
 
     return Scaffold(
 
@@ -80,9 +82,7 @@ class _PanierScreenState extends State<PanierScreen> {
                                     style: TextStyle(color: Colors.white, fontSize: 16,decoration: TextDecoration.underline)
                                 ),
                                 onTap: (){
-                                    setState(() {
-                                      reservations.clear();
-                                    });
+                                    cart.clearCart();
                                 },
                               ),
                           ),
@@ -94,21 +94,23 @@ class _PanierScreenState extends State<PanierScreen> {
                   //Reservations List
                   Expanded(
                     flex: 7,
-                    child: reservations.length > 0 ? ListView.builder(
+                    child: cart.reservations.length > 0 ? ListView.builder(
                         scrollDirection: Axis.vertical,
-                        itemCount: reservations.length,
+                        itemCount: cart.reservations.length,
                         itemBuilder: (context, index){
                           return Dismissible(
-                            key: Key(reservations[index].id.toString()),
+                            key: Key(cart.reservations[index].course.id.toString()),
                             child: ReservationCard(
-                              reservation: reservations[index],
-                              deleting: (){setState(() {reservations.removeAt(index);});},
-                              updatingTotal: (){setState(() { total = calculateTotal(reservations); });},
+                              reservation: cart.reservations[index],
+                              deleting: (){
+                                //TODO DELETING IDK
+                              },
+                              updatingTotal: (){
+                                //TODO UPDATING TOTAL
+                                },
                             ),
                             onDismissed: (direction) {
-                              setState(() {
-                                reservations.removeAt(index);
-                              });
+                              //TODO DELETE RESERVATION
                             },
                           );
                         }
@@ -142,7 +144,11 @@ class _PanierScreenState extends State<PanierScreen> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: BottomNavBar(height: height, width: width, total: total),
+                  child: BottomNavBar(
+                      height: height,
+                      width: width,
+                      total: 0 //TODO
+                  ),
                 ),
               )
           ),
@@ -153,10 +159,3 @@ class _PanierScreenState extends State<PanierScreen> {
   }
 }
 
-calculateTotal(List<Reservation> reservations){
-  double total=0;
-  reservations.forEach(
-          (e) => total += e.price*e.reservedPlaces
-  );
-  return total;
-}

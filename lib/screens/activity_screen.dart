@@ -125,12 +125,8 @@ class _ActivityScreenState extends State<ActivityScreen> {
                       child: courses != null ? ListView.builder(
                           itemCount: courses!.length,
                           itemBuilder: (context,index){
-                            CourseInfo courseInfos = courses![index].courseInfos[0];
                             return ActivityInfoCard(
-                              name: courseInfos.title,
-                              price: courseInfos.nomadPrice,
-                              partnerId: courses![index].partnerId,
-                              date : courseInfos.date,
+                              course: courses![index],
                             );
                           }
                       )

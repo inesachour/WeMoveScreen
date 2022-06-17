@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:wemove_test/models/course.dart';
 import 'package:wemove_test/models/partner.dart';
 import 'package:wemove_test/screens/panier_screen.dart';
 import 'package:wemove_test/services/partners_service.dart';
+import 'package:wemove_test/view_models/cart_view.dart';
 import 'package:wemove_test/widgets/common/display_widgets.dart';
 
 import '../../constants/colors.dart';
 
 class ActivityInfoCard extends StatefulWidget {
-  ActivityInfoCard({required this.name, required this.partnerId,required this.price, required this.date});
+  ActivityInfoCard({required this.course});
 
-  String name;
-  String partnerId;
-  int? price;
-  DateTime date;
+  Course course;
 
   @override
   _ActivityInfoCardState createState() => _ActivityInfoCardState();
@@ -25,7 +25,7 @@ class _ActivityInfoCardState extends State<ActivityInfoCard> {
   @override
   Widget build(BuildContext context) {
 
-    Future<Partner?> futurePartner = PartnersService.getPartnerById(widget.partnerId);
+    Future<Partner?> futurePartner = PartnersService.getPartnerById(widget.course.partnerId);
 
     getPartner()async{
       futurePartner.then((value) {
@@ -64,14 +64,14 @@ class _ActivityInfoCardState extends State<ActivityInfoCard> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(widget.name,style: TextStyle(color: Colors.white),),
+                        Text(widget.course.courseInfos[0].title,style: TextStyle(color: Colors.white),),
                         Text(partner != null ? partner!.name : "",style: TextStyle(color: Colors.white)),
                         partner!= null ? Text(partner!.geoZone.geoZoneLabel.label,style: TextStyle(color: Colors.white)) : SizedBox()
                       ],
                     ),
                   ],
                 ),
-                widget.price != null ? DisplayPriceWidget(text: widget.price.toString()) : SizedBox()
+                widget.course.courseInfos[0].nomadPrice != null ? DisplayPriceWidget(text: widget.course.courseInfos[0].nomadPrice.toString()) : SizedBox()
               ],
             ),
 
@@ -87,7 +87,7 @@ class _ActivityInfoCardState extends State<ActivityInfoCard> {
                       children: [
                         Icon(Icons.calendar_month_sharp, color: Colors.white,),
                         SizedBox(width: 5,),
-                        Text(widget.date.toString(), style: TextStyle(color: Colors.white),)
+                        Text(widget.course.courseInfos[0].date.toString(), style: TextStyle(color: Colors.white),)
                       ],
                     ),
 
@@ -101,6 +101,7 @@ class _ActivityInfoCardState extends State<ActivityInfoCard> {
                 ElevatedButton(
                   child: Text("Réserver"),
                   onPressed: (){
+                    Provider.of<CartView>(context,listen: false).addReservation(course: widget.course);
                     Navigator.push(context, MaterialPageRoute(builder: (context) => PanierScreen()));
                   },
                   style: ButtonStyle(
