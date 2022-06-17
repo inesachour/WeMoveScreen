@@ -1,21 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:wemove_test/models/partner.dart';
 import 'package:wemove_test/screens/panier_screen.dart';
+import 'package:wemove_test/services/partners_service.dart';
 import 'package:wemove_test/widgets/common/display_widgets.dart';
 
 import '../../constants/colors.dart';
 
 class ActivityInfoCard extends StatefulWidget {
-  ActivityInfoCard({required this.name});
+  ActivityInfoCard({required this.name, required this.partnerId});
 
   String name;
+  String partnerId;
 
   @override
   _ActivityInfoCardState createState() => _ActivityInfoCardState();
 }
 
 class _ActivityInfoCardState extends State<ActivityInfoCard> {
+
+  Partner? partner;
+
   @override
   Widget build(BuildContext context) {
+
+    Future<Partner?> futurePartner = PartnersService.getPartnerById(widget.partnerId);
+
+    getPartner()async{
+      futurePartner.then((value) {
+        setState(() {
+          partner = value;
+        });
+      });
+    }
+
+    getPartner();
+
     return Card(
       color: primaryBackgroundColor,
       child: Padding(
@@ -44,7 +63,7 @@ class _ActivityInfoCardState extends State<ActivityInfoCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(widget.name,style: TextStyle(color: Colors.white),),
-                        Text("Partenaire Name",style: TextStyle(color: Colors.white)),
+                        Text(partner != null ? partner!.name : "",style: TextStyle(color: Colors.white)),
                         Text("Zone",style: TextStyle(color: Colors.white))
                       ],
                     ),

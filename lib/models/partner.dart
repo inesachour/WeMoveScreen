@@ -1,12 +1,28 @@
 // To parse this JSON data, do
 //
-//     final partner = partnerFromJson(jsonString);
+//     final partners = partnersFromJson(jsonString);
 
 import 'dart:convert';
 
-List<Partner> partnerFromJson(String str) => List<Partner>.from(json.decode(str).map((x) => Partner.fromJson(x)));
+Partners partnersFromJson(String str) => Partners.fromJson(json.decode(str));
 
-String partnerToJson(List<Partner> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String partnersToJson(Partners data) => json.encode(data.toJson());
+
+class Partners {
+  Partners({
+    required this.partners,
+  });
+
+  List<Partner> partners;
+
+  factory Partners.fromJson(Map<String, dynamic> json) => Partners(
+    partners: List<Partner>.from(json["partners"].map((x) => Partner.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "partners": List<dynamic>.from(partners.map((x) => x.toJson())),
+  };
+}
 
 class Partner {
   Partner({
@@ -14,7 +30,7 @@ class Partner {
     required this.name,
     required this.description,
     required this.phone1,
-    this.phone2,
+    required this.phone2,
     required this.email,
     required this.logo,
     required this.image1,
@@ -43,14 +59,14 @@ class Partner {
   String logo;
   String image1;
   String? image2;
-  String? image3;
+  dynamic image3;
   DateTime emailVerifiedAt;
   String partnerTypeId;
   DateTime createdAt;
   DateTime updatedAt;
   int percentageNomad;
   int percentageCompany;
-  String? deletedAt;
+  dynamic deletedAt;
   int notArchived;
   dynamic administratorId;
   int passPrice;
@@ -135,7 +151,7 @@ class GeoZone {
   String geoZoneLabelId;
   DateTime createdAt;
   DateTime updatedAt;
-  GeoZoneLabel geoZoneLabel;
+  PartnerType geoZoneLabel;
 
   factory GeoZone.fromJson(Map<String, dynamic> json) => GeoZone(
     id: json["id"],
@@ -149,7 +165,7 @@ class GeoZone {
     geoZoneLabelId: json["geo_zone_label_id"],
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
-    geoZoneLabel: GeoZoneLabel.fromJson(json["geo_zone_label"]),
+    geoZoneLabel: PartnerType.fromJson(json["geo_zone_label"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -181,41 +197,9 @@ class PartnerType {
   String label;
   DateTime createdAt;
   DateTime updatedAt;
-  DateTime? deletedAt;
+  dynamic deletedAt;
 
   factory PartnerType.fromJson(Map<String, dynamic> json) => PartnerType(
-    id: json["id"],
-    label: json["label"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
-    deletedAt: json["deleted_at"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "label": label,
-    "created_at": createdAt.toIso8601String(),
-    "updated_at": updatedAt.toIso8601String(),
-    "deleted_at": deletedAt,
-  };
-}
-
-class GeoZoneLabel {
-  GeoZoneLabel({
-    required this.id,
-    required this.label,
-    required this.createdAt,
-    required this.updatedAt,
-    this.deletedAt,
-  });
-
-  String id;
-  String label;
-  DateTime createdAt;
-  DateTime updatedAt;
-  DateTime? deletedAt;
-
-  factory GeoZoneLabel.fromJson(Map<String, dynamic> json) => GeoZoneLabel(
     id: json["id"],
     label: json["label"],
     createdAt: DateTime.parse(json["created_at"]),

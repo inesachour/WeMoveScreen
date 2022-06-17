@@ -10,8 +10,8 @@ class PartnersService{
     try{
       var url = Uri.parse(partnersUrl);
       var response = await http.get(url);
-      List<Partner> partners = partnerFromJson(response.body);
-      Partner? partner = partners.firstWhere((element) => element.id == id);
+      List<Partner> partners = partnersFromJson(response.body).partners;
+      Partner? partner = partners.firstWhere((element) => element.id==id);
       return partner;
     }
     catch(e){

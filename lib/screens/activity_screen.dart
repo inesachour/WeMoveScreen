@@ -121,14 +121,14 @@ class _ActivityScreenState extends State<ActivityScreen> {
 
                     Expanded(
                       flex: 3,
-                      child: ListView.builder(
+                      child: courses != null ? ListView.builder(
                           itemCount: courses!.length,
                           itemBuilder: (context,index){
                             CourseInfo courseInfos = courses![index].courseInfos[0];
-                            return ActivityInfoCard(name: courseInfos.title,);
+                            return ActivityInfoCard(name: courseInfos.title,partnerId: courses![index].partnerId,);
                           }
-
-                      ),
+                      )
+                      : CircularProgressIndicator(),
                     )
                   ],
                 ),
