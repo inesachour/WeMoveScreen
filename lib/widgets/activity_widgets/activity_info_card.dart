@@ -7,10 +7,12 @@ import 'package:wemove_test/widgets/common/display_widgets.dart';
 import '../../constants/colors.dart';
 
 class ActivityInfoCard extends StatefulWidget {
-  ActivityInfoCard({required this.name, required this.partnerId});
+  ActivityInfoCard({required this.name, required this.partnerId,required this.price, required this.date});
 
   String name;
   String partnerId;
+  int? price;
+  DateTime date;
 
   @override
   _ActivityInfoCardState createState() => _ActivityInfoCardState();
@@ -47,29 +49,29 @@ class _ActivityInfoCardState extends State<ActivityInfoCard> {
 
                 Row(
                   children: [
-                    Container(
+                    partner!= null ? Container(
                       width: 50,
                       height: 50,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                          image: AssetImage("assets/images/partners/6723suNIxH2F1aZVnMSS.png"),
+                          image: AssetImage("assets/images/${partner!.logo}"),
                           fit: BoxFit.cover,
                         ),
                       ),
-                    ),
+                    ) : SizedBox(),
                     SizedBox(width: 10,),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(widget.name,style: TextStyle(color: Colors.white),),
                         Text(partner != null ? partner!.name : "",style: TextStyle(color: Colors.white)),
-                        Text("Zone",style: TextStyle(color: Colors.white))
+                        partner!= null ? Text(partner!.geoZone.geoZoneLabel.label,style: TextStyle(color: Colors.white)) : SizedBox()
                       ],
                     ),
                   ],
                 ),
-                DisplayPriceWidget(text: "20")
+                widget.price != null ? DisplayPriceWidget(text: widget.price.toString()) : SizedBox()
               ],
             ),
 
@@ -85,7 +87,7 @@ class _ActivityInfoCardState extends State<ActivityInfoCard> {
                       children: [
                         Icon(Icons.calendar_month_sharp, color: Colors.white,),
                         SizedBox(width: 5,),
-                        Text("date", style: TextStyle(color: Colors.white),)
+                        Text(widget.date.toString(), style: TextStyle(color: Colors.white),)
                       ],
                     ),
 

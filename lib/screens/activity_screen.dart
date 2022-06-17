@@ -82,6 +82,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
                                       Expanded(
                                         child: Column(
                                           children: [
+
                                             Row(
                                               children: [
                                                 Icon(Icons.check, color: Colors.white,),
@@ -125,7 +126,12 @@ class _ActivityScreenState extends State<ActivityScreen> {
                           itemCount: courses!.length,
                           itemBuilder: (context,index){
                             CourseInfo courseInfos = courses![index].courseInfos[0];
-                            return ActivityInfoCard(name: courseInfos.title,partnerId: courses![index].partnerId,);
+                            return ActivityInfoCard(
+                              name: courseInfos.title,
+                              price: courseInfos.nomadPrice,
+                              partnerId: courses![index].partnerId,
+                              date : courseInfos.date,
+                            );
                           }
                       )
                       : CircularProgressIndicator(),
