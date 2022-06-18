@@ -27,7 +27,7 @@ class DatesService{
     var mois = capitalize(DateFormat('MMM',"fr").format(date).replaceAll('.', ''));
 
     var today = DateFormat('dd').format(DateTime.now());
-    if(jourDuMois == today){ //TODO FIX
+    if(jourDuMois == today){
       jourDeSemaine = "Aujourd'hui";
     }
     else if(jourDuMois == (int.parse(today)+1).toString()){

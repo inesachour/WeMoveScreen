@@ -9,7 +9,7 @@ import 'package:wemove_test/services/dates_service.dart';
 import 'package:wemove_test/services/partners_service.dart';
 import 'package:wemove_test/view_models/cart_view.dart';
 import 'package:wemove_test/widgets/common/display_widgets.dart';
-import 'package:wemove_test/widgets/panier_widgets/displaying_widgets.dart';
+import 'package:wemove_test/widgets/panier_widgets/panier_widgets.dart';
 
 class ReservationCard extends StatefulWidget {
 
@@ -149,7 +149,7 @@ class _ReservationCardState extends State<ReservationCard> {
                 children: [
 
                   //Displating price
-                  DisplayPriceWidget(
+                  PriceWidget(
                       text: widget.reservation.course.courseInfos[0].nomadPrice != null
                           ? widget.reservation.course.courseInfos[0].nomadPrice!.toStringAsFixed(2)
                           : "",

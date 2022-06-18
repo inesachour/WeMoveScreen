@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:wemove_test/constants/colors.dart';
 import 'package:wemove_test/view_models/cart_view.dart';
 import 'package:wemove_test/widgets/common/display_widgets.dart';
-import 'package:wemove_test/widgets/panier_widgets/displaying_widgets.dart';
 
 Widget BottomNavBar({required double height, required double width}){
   return Row(
@@ -20,7 +19,7 @@ Widget BottomNavBar({required double height, required double width}){
 
           Consumer<CartView>(
           builder: (context,cart,child){
-            return DisplayPriceWidget(
+            return PriceWidget(
                 text: cart.total.toStringAsFixed(2),
                 fontWeight: FontWeight.w700,
                 fontSizeMainText: 24,
@@ -44,5 +43,18 @@ Widget BottomNavBar({required double height, required double width}){
         ),
       )
     ],
+  );
+}
+
+Widget incdecButton ({required Color color, required String text, required onPressed }){
+  return SizedBox(
+    width: 40,
+    child: ElevatedButton(
+      child: Text(text, style: TextStyle(fontSize: 22),textAlign: TextAlign.center,),
+      style: ButtonStyle(
+        backgroundColor:MaterialStateProperty.all(color),
+      ),
+      onPressed: onPressed,
+    ),
   );
 }

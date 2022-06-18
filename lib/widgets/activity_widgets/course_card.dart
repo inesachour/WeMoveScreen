@@ -77,7 +77,7 @@ class _CourseCardState extends State<CourseCard> {
                     ),
                   ],
                 ),
-                widget.course.courseInfos[0].nomadPrice != null ? DisplayPriceWidget(text: widget.course.courseInfos[0].nomadPrice.toString()) : SizedBox()
+                widget.course.courseInfos[0].nomadPrice != null ? PriceWidget(text: widget.course.courseInfos[0].nomadPrice.toString()) : SizedBox()
               ],
             ),
 

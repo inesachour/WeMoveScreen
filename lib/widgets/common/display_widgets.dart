@@ -15,7 +15,7 @@ Widget DurationWidget({required String start,required String end}){
 }
 
 //Widget displaying price
-Widget DisplayPriceWidget({required String text, double fontSizeMainText = 22, FontWeight fontWeight = FontWeight.w700, double fontSizeCurrency = 14}){
+Widget PriceWidget({required String text, double fontSizeMainText = 22, FontWeight fontWeight = FontWeight.w700, double fontSizeCurrency = 14}){
   return RichText(
     text: TextSpan(
         text: text,
