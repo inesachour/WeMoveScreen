@@ -84,8 +84,9 @@ class _ActivityScreenState extends State<ActivityScreen> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      /*Expanded(
+                                      Expanded(
                                         child: Container(
+                                          height: MediaQuery.of(context).size.height*0.14,
                                           child: Column(
                                             children: [
                                               Expanded(
@@ -95,13 +96,18 @@ class _ActivityScreenState extends State<ActivityScreen> {
                                                       children: [
                                                         Icon(Icons.check, color: Colors.white,),
                                                         SizedBox(width: 5,),
-                                                        Text(activity!.idealFor[index].label,style: TextStyle(color: Colors.white))
+                                                        Expanded(
+                                                            child: Text(
+                                                                activity!.idealFor[index].label,
+                                                                style: TextStyle(color: Colors.white)
+                                                            )
+                                                        )
                                                       ],
                                                     );
                                                   },
                                                   itemCount: activity!.idealFor.length,
                                                 ),
-                                                flex: activity!.idealFor.length,
+                                                flex: 1,
                                               ),
 
                                               Expanded(
@@ -111,28 +117,38 @@ class _ActivityScreenState extends State<ActivityScreen> {
                                                       children: [
                                                         Icon(Icons.close, color: Colors.white,),
                                                         SizedBox(width: 5,),
-                                                        Text(activity!.recommendations[index].label,style: TextStyle(color: Colors.white),)
+                                                        Expanded(
+                                                          child: Text(
+                                                            activity!.recommendations[index].label,
+                                                            style: TextStyle(color: Colors.white),
+                                                          ),
+                                                        )
                                                       ],
                                                     );
                                                   },
                                                   itemCount: activity!.recommendations.length,
                                                 ),
-                                                flex: activity!.recommendations.length,
+                                                flex: 1,
                                               ),
 
                                             ],
                                           ),
-                                          height: MediaQuery.of(context).size.height*0.14,
                                         ),
-                                      ),*/
+                                      ),
                                       Expanded(
                                         child: Row(
                                           children: [
-                                            Icon(Icons.check, color: Colors.white,),
+                                            Icon(Icons.signal_cellular_alt_outlined, color: Colors.white,),
                                             SizedBox(width: 5,),
-                                            Text("text1",style: TextStyle(color: Colors.white))
+                                            Expanded(
+                                                child: Text(
+                                                    activity!.getAccessibilityLevel(),
+                                                    style: TextStyle(color: Colors.white)
+                                                )
+                                            )
                                           ],
                                         ),
+
                                       ),
                                     ],
                                   )

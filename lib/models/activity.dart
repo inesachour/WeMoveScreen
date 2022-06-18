@@ -66,6 +66,18 @@ class Activity {
     "recommendations": List<dynamic>.from(recommendations.map((x) => x.toJson())),
     "ideal_for": List<dynamic>.from(idealFor.map((x) => x.toJson())),
   };
+
+  String getAccessibilityLevel(){
+    if(accessibility == 1){
+      return "Accessible à tous";
+    }
+    else if (accessibility == 2){
+      return "Moyen";
+    }
+    else{
+      return "Difficile";
+    }
+  }
 }
 
 class ActivityType {
