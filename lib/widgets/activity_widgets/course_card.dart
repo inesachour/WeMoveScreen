@@ -10,16 +10,16 @@ import 'package:wemove_test/widgets/common/display_widgets.dart';
 
 import '../../constants/colors.dart';
 
-class ActivityInfoCard extends StatefulWidget {
-  ActivityInfoCard({required this.course});
+class CourseCard extends StatefulWidget {
+  CourseCard({required this.course});
 
   Course course;
 
   @override
-  _ActivityInfoCardState createState() => _ActivityInfoCardState();
+  _CourseCardState createState() => _CourseCardState();
 }
 
-class _ActivityInfoCardState extends State<ActivityInfoCard> {
+class _CourseCardState extends State<CourseCard> {
 
   Partner? partner;
 

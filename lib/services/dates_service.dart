@@ -7,7 +7,7 @@ class DatesService{
   static List<String> getTime(DateTime date, int duration){
     initializeDateFormatting('fr');
     var heureDebut = DateFormat.Hm().format(date).replaceAll(':', 'H');
-    var heureFin = DateFormat.Hm().format(date.add(Duration(minutes: 60))).replaceAll(':', 'H');
+    var heureFin = DateFormat.Hm().format(date.add(Duration(minutes: duration))).replaceAll(':', 'H');
 
     return [heureDebut, heureFin];
   }

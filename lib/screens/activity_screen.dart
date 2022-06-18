@@ -4,7 +4,7 @@ import 'package:wemove_test/models/activity.dart';
 import 'package:wemove_test/models/course.dart';
 import 'package:wemove_test/services/activities_service.dart';
 import 'package:wemove_test/services/courses_service.dart';
-import 'package:wemove_test/widgets/activity_widgets/activity_info_card.dart';
+import 'package:wemove_test/widgets/activity_widgets/course_card.dart';
 import 'package:wemove_test/widgets/activity_widgets/activity_widgets.dart';
 
 class ActivityScreen extends StatefulWidget {
@@ -125,7 +125,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
                       child: courses != null ? ListView.builder(
                           itemCount: courses!.length,
                           itemBuilder: (context,index){
-                            return ActivityInfoCard(
+                            return CourseCard(
                               course: courses![index],
                             );
                           }
