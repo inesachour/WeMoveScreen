@@ -22,12 +22,17 @@ class CartView extends ChangeNotifier{
     }
     if(inCart){
       Reservation r = _reservations.firstWhere((element) => element.course.id == course.id);
-      r.reservedPlaces++;
+      if(r.reservedPlaces < course.courseInfos[0].stock){
+        r.reservedPlaces++;
+        calculateTotal();
+      }
     }
     else{
-      _reservations.add(Reservation(course: course, reservedPlaces: 1));
+      if(course.courseInfos[0].stock >= 1){
+        _reservations.add(Reservation(course: course, reservedPlaces: 1));
+        calculateTotal();
+      }
     }
-    calculateTotal();
   }
 
   deleteReservation({required Reservation reservation}){
@@ -38,7 +43,7 @@ class CartView extends ChangeNotifier{
 
   incrementReservationsPlaces({required Reservation reservation}){
     _reservations.forEach((element) {
-      if(element.course.id == reservation.course.id){
+      if(element.course.id == reservation.course.id && element.reservedPlaces < reservation.course.courseInfos[0].stock){
         element.reservedPlaces++;
         calculateTotal();
       }
