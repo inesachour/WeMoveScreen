@@ -130,7 +130,7 @@ class _ReservationCardState extends State<ReservationCard> {
 
 
               //Displaying place
-              Text(partner != null ?partner!.name: "", style: TextStyle(color: Colors.white, fontSize: 15)), //TODO
+              Text(partner != null ?partner!.name: "", style: TextStyle(color: Colors.white, fontSize: 15)),
               SizedBox(height: 7,),
 
 

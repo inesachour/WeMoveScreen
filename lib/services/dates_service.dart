@@ -28,7 +28,7 @@ class DatesService{
 
     var today = DateFormat('dd').format(DateTime.now());
     if(jourDuMois == today){ //TODO FIX
-      jourDeSemaine == "Aujourd'hui";
+      jourDeSemaine = "Aujourd'hui";
     }
     else if(jourDuMois == (int.parse(today)+1).toString()){
       jourDeSemaine = "Demain";

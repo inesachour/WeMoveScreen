@@ -68,7 +68,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
                             ),
                           ),
                           Positioned(
-                            top: 95,
+                            top: MediaQuery.of(context).size.height*0.13,
                             width: MediaQuery.of(context).size.width,
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -78,7 +78,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
                                   Text(activity!.name, style: TextStyle(color: Colors.white,fontSize: 22,fontWeight: FontWeight.bold),),
                                   Text(activity!.description, style: TextStyle(color: Colors.white, fontSize: 16 ,fontWeight: FontWeight.w400),),
 
-                                  SizedBox(height: 20,),
+                                  SizedBox(height: MediaQuery.of(context).size.height*0.016,),
 
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -154,7 +154,10 @@ class _ActivityScreenState extends State<ActivityScreen> {
 
                                       ),
                                     ],
-                                  )
+                                  ),
+
+                                  SizedBox(height: MediaQuery.of(context).size.height*0.02,),
+
                                 ],
                               ),
                             ),
@@ -167,14 +170,13 @@ class _ActivityScreenState extends State<ActivityScreen> {
                       flex: 3,
                       child: courses != null ? ListView.builder(
                           itemCount: courses!.length,
-                          padding: EdgeInsets.only(bottom: 30,top: 5),
                           itemBuilder: (context,index){
                             return CourseCard(
                               course: courses![index],
                             );
                           }
                       )
-                      : CircularProgressIndicator(),
+                      : Center(child: CircularProgressIndicator()),
                     ),
                   ],
                 ),
