@@ -23,14 +23,19 @@ class _ActivityScreenState extends State<ActivityScreen> {
 
   Future getData() async{
     activityFuture.then((value) {
-      setState(() {
-        activity = value;
-      });
+      if(mounted){
+        setState(() {
+          activity = value;
+        });
+      }
+
     });
     coursesFuture.then((value) {
-      setState(() {
-        courses = value;
-      });
+      if(mounted){
+        setState(() {
+          courses = value;
+        });
+      }
     });
   }
 
@@ -79,28 +84,47 @@ class _ActivityScreenState extends State<ActivityScreen> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Expanded(
-                                        child: Column(
-                                          children: [
+                                      /*Expanded(
+                                        child: Container(
+                                          child: Column(
+                                            children: [
+                                              Expanded(
+                                                child: ListView.builder(
+                                                  itemBuilder: (context,index){
+                                                    return Row(
+                                                      children: [
+                                                        Icon(Icons.check, color: Colors.white,),
+                                                        SizedBox(width: 5,),
+                                                        Text(activity!.idealFor[index].label,style: TextStyle(color: Colors.white))
+                                                      ],
+                                                    );
+                                                  },
+                                                  itemCount: activity!.idealFor.length,
+                                                ),
+                                                flex: activity!.idealFor.length,
+                                              ),
 
-                                            Row(
-                                              children: [
-                                                Icon(Icons.check, color: Colors.white,),
-                                                SizedBox(width: 5,),
-                                                Text("text1",style: TextStyle(color: Colors.white))
-                                              ],
-                                            ),
+                                              Expanded(
+                                                child: ListView.builder(
+                                                  itemBuilder: (context,index){
+                                                    return Row(
+                                                      children: [
+                                                        Icon(Icons.close, color: Colors.white,),
+                                                        SizedBox(width: 5,),
+                                                        Text(activity!.recommendations[index].label,style: TextStyle(color: Colors.white),)
+                                                      ],
+                                                    );
+                                                  },
+                                                  itemCount: activity!.recommendations.length,
+                                                ),
+                                                flex: activity!.recommendations.length,
+                                              ),
 
-                                            Row(
-                                              children: [
-                                                Icon(Icons.close, color: Colors.white,),
-                                                SizedBox(width: 5,),
-                                                Text("text2",style: TextStyle(color: Colors.white))
-                                              ],
-                                            ),
-                                          ],
+                                            ],
+                                          ),
+                                          height: MediaQuery.of(context).size.height*0.14,
                                         ),
-                                      ),
+                                      ),*/
                                       Expanded(
                                         child: Row(
                                           children: [
@@ -136,7 +160,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
                 ),
               ),
             ),
-            ActivityAppBarWidget(width: MediaQuery.of(context).size.width)
+            ActivityAppBarWidget(width: MediaQuery.of(context).size.width, context: context)
           ],
         ) : CircularProgressIndicator()
       ),

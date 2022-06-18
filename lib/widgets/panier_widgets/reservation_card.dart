@@ -40,9 +40,11 @@ class _ReservationCardState extends State<ReservationCard> {
 
     getPartner()async{
       futurePartner.then((value) {
-        setState(() {
-          partner = value;
-        });
+        if(mounted){
+          setState(() {
+            partner = value;
+          });
+        }
       });
     }
 
@@ -185,9 +187,7 @@ class _ReservationCardState extends State<ReservationCard> {
 
                       //Increment Button
                       incdecButton(color: thirdBackgroundColor, text: "+",onPressed:  (){
-                        setState(() {
                           Provider.of<CartView>(context,listen: false).incrementReservationsPlaces(reservation: widget.reservation);
-                        });
                       }),
                     ],
                   ),
