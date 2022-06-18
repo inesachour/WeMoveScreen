@@ -28,14 +28,16 @@ class _CourseCardState extends State<CourseCard> {
 
     List<String> duration = DatesService.getTime(widget.course.courseInfos[0].date, widget.course.duration);
 
-
     Future<Partner?> futurePartner = PartnersService.getPartnerById(widget.course.partnerId);
 
     getPartner()async{
       futurePartner.then((value) {
-        setState(() {
-          partner = value;
-        });
+        if(mounted){
+          setState(() {
+            partner = value;
+          });
+        }
+
       });
     }
 

@@ -58,3 +58,37 @@ Widget incdecButton ({required Color color, required String text, required onPre
     ),
   );
 }
+
+Widget TopPartPanier({required double width, required double height, required BuildContext context}){
+  return Expanded(
+    flex: 2,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      child: Column(
+        children: [
+          SizedBox(height: 8,),
+          SizedBox(
+              width: width,
+              child: Text(
+                "Cette réservation n'est pas pour toi? Après avoir finalisé l'achat, tu pourras modifier le bénéficiaire de chaque accès en indiquant son nom.",
+                textAlign: TextAlign.left,style: TextStyle(color: Colors.white,fontSize: 14),)
+          ),
+          SizedBox(height: 8,),
+          SizedBox(
+            width: width,
+            child: InkWell(
+              child: Text(
+                  "Vider le panier",
+                  textAlign: TextAlign.right,
+                  style: TextStyle(color: Colors.white, fontSize: 16,decoration: TextDecoration.underline)
+              ),
+              onTap: (){
+                Provider.of<CartView>(context,listen: false).clearCart();
+              },
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}

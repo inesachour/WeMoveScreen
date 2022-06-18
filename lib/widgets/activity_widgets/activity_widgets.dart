@@ -50,3 +50,51 @@ Widget ActivityAppBarWidget({required BuildContext context}){
     ],
   );
 }
+
+Widget IdealForText({required String label}){
+  return Row(
+    children: [
+      Icon(Icons.check, color: Colors.white,),
+      SizedBox(width: 5,),
+      Expanded(
+          child: Text(
+              label,
+              style: TextStyle(color: Colors.white)
+          )
+      ),
+    ],
+  );
+}
+
+Widget RecommendationText({required String label}){
+  return Row(
+    children: [
+      Icon(
+        Icons.close,
+        color: Colors.white,
+      ),
+      SizedBox(width: 5,),
+      Expanded(
+        child: Text(
+          label,
+          style: TextStyle(color: Colors.white),
+        ),
+      )
+    ],
+  );
+}
+
+Widget AccessibilityText({required String level}){
+  return Row(
+    children: [
+      Icon(Icons.signal_cellular_alt_outlined, color: Colors.white,),
+      SizedBox(width: 5,),
+      Expanded(
+          child: Text(
+              level,
+              style: TextStyle(color: Colors.white)
+          )
+      )
+    ],
+  );
+}
