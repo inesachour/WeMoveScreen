@@ -13,7 +13,7 @@ class CartView extends ChangeNotifier{
   List<Reservation> get reservations => _reservations;
   double get total => _total;
 
-  addReservation({required Course course}){
+  addReservation({required Course course, required int? passPrice}){
     bool inCart = false;
     for(var r in _reservations){
       if(r.course.id == course.id){
@@ -29,7 +29,12 @@ class CartView extends ChangeNotifier{
     }
     else{
       if(course.courseInfos[0].stock >= 1){
-        _reservations.add(Reservation(course: course, reservedPlaces: 1));
+        if(course.daypassOnly==1){
+          _reservations.add(Reservation(course: course, reservedPlaces: 1,passPrice: passPrice));
+        }
+        else{
+          _reservations.add(Reservation(course: course, reservedPlaces: 1,passPrice: null));
+        }
         calculateTotal();
       }
     }
@@ -68,7 +73,12 @@ class CartView extends ChangeNotifier{
   calculateTotal(){
     _total = 0;
     for (var r in reservations) {
-      _total += r.course.courseInfos[0].nomadPrice!= null ? r.course.courseInfos[0].nomadPrice! * r.reservedPlaces : 0;
+      if(r.course.daypassOnly == 0){
+        _total += r.course.courseInfos[0].nomadPrice! * r.reservedPlaces;
+      }
+      else{
+        _total += r.passPrice! * r.reservedPlaces;
+      }
     }
     notifyListeners();
   }

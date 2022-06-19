@@ -50,7 +50,8 @@ class _ReservationCardState extends State<ReservationCard> {
 
     List<String> duration = DatesService.getTime(widget.reservation.course.courseInfos[0].date, widget.reservation.course.duration);
 
-    return Card(
+    return partner != null
+        ? Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10)
       ),
@@ -152,9 +153,9 @@ class _ReservationCardState extends State<ReservationCard> {
 
                   //Displating price
                   PriceWidget(
-                      text: widget.reservation.course.courseInfos[0].nomadPrice != null
+                      text: widget.reservation.course.daypassOnly != 1
                           ? widget.reservation.course.courseInfos[0].nomadPrice!.toStringAsFixed(2)
-                          : "",
+                          : partner!.passPrice.toStringAsFixed(2),
                       fontWeight: FontWeight.w800,
                       fontSizeMainText: 22,
                       fontSizeCurrency: 13
@@ -199,7 +200,8 @@ class _ReservationCardState extends State<ReservationCard> {
           ),
         ),
       ),
-    );
+    )
+        : Center(child: CircularProgressIndicator(),);
   }
 }
 

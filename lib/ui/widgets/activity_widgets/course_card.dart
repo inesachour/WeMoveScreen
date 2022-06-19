@@ -32,7 +32,7 @@ class _CourseCardState extends State<CourseCard> {
 
     getPartner()async{
       futurePartner.then((value) {
-        if(mounted){
+        if(mounted && partner == null){
           setState(() {
             partner = value;
           });
@@ -49,7 +49,8 @@ class _CourseCardState extends State<CourseCard> {
       color: primaryBackgroundColor,
       child: Padding(
         padding: const EdgeInsets.all(15),
-        child: Column(
+        child: partner != null
+            ? Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,7 +58,7 @@ class _CourseCardState extends State<CourseCard> {
 
                 Row(
                   children: [
-                    partner!= null ? Container(
+                    Container(
                       width: 50,
                       height: 50,
                       decoration: BoxDecoration(
@@ -67,7 +68,7 @@ class _CourseCardState extends State<CourseCard> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                    ) : SizedBox(),
+                    ),
                     SizedBox(width: 10,),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,7 +110,7 @@ class _CourseCardState extends State<CourseCard> {
                 ElevatedButton(
                   child: Text("Réserver"),
                   onPressed: (){
-                    Provider.of<CartView>(context,listen: false).addReservation(course: widget.course);
+                    Provider.of<CartView>(context,listen: false).addReservation(course: widget.course, passPrice: widget.course.daypassOnly == 1 ? partner!.passPrice : widget.course.courseInfos[0].nomadPrice);
                     Navigator.push(context, MaterialPageRoute(builder: (context) => PanierScreen()));
                   },
                   style: ButtonStyle(
@@ -125,7 +126,8 @@ class _CourseCardState extends State<CourseCard> {
               ],
             ),
           ],
-        ),
+        )
+            : SizedBox(),
       ),
     );
   }

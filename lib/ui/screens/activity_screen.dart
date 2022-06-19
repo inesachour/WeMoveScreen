@@ -24,7 +24,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
 
   Future getData() async{
     activityFuture.then((value) {
-      if(mounted){
+      if(mounted && activity ==null){
         setState(() {
           activity = value;
         });
@@ -32,7 +32,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
 
     });
     coursesFuture.then((value) {
-      if(mounted){
+      if(mounted && courses==null){
         setState(() {
           courses = value;
         });
