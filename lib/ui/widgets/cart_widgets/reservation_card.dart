@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:wemove_test/constants/colors.dart';
-import 'package:wemove_test/data/reservations.dart';
-import 'package:wemove_test/widgets/displaying_widgets.dart';
+import 'package:wemove_test/core/models/partner.dart';
+import 'package:wemove_test/core/models/reservation.dart';
+import 'package:wemove_test/core/services/dates_service.dart';
+import 'package:wemove_test/core/services/partners_service.dart';
+import 'package:wemove_test/core/view_models/cart_view.dart';
+import 'package:wemove_test/ui/widgets/common/display_widgets.dart';
+import 'package:wemove_test/ui/widgets/cart_widgets/cart_widgets.dart';
 
 class ReservationCard extends StatefulWidget {
 
-  ReservationCard({required this.reservation , required this.deleting, required this.updatingTotal});
+  ReservationCard({required this.reservation,});
 
   Reservation reservation;
-  var deleting;
-  var updatingTotal;
 
 
   @override
@@ -21,23 +23,31 @@ class ReservationCard extends StatefulWidget {
 class _ReservationCardState extends State<ReservationCard> {
 
   bool onDeleteClicked = false;
-  String? duree = null;
-
+  Partner? partner;
 
   @override
   Widget build(BuildContext context) {
 
-    if(widget.reservation.heureDebut != null && widget.reservation.heureFin != null){
-      duree = "De "+ widget.reservation.heureDebut! + " à "+ widget.reservation.heureFin!;
+    List<String> date = DatesService.getShortDate(widget.reservation.course.courseInfos[0].date);
+    Future<Partner?> futurePartner = PartnersService.getPartnerById(widget.reservation.course.partnerId);
+
+    getPartner() async{
+      futurePartner.then((value) {
+        if(mounted && partner == null){
+          setState(() {
+            partner = value;
+          });
+        }
+      });
     }
 
-    //Duration Time formatting to french
-    initializeDateFormatting('fr');
-    var date = widget.reservation.date;
-    var jour = capitalize(DateFormat('EEE dd',"FR-fr").format(date).replaceAll('.', ''));
-    var mois = capitalize(DateFormat('MMM',"fr").format(date).replaceAll('.', ''));
+    getPartner();
 
-    return Card(
+
+    List<String> duration = DatesService.getTime(widget.reservation.course.courseInfos[0].date, widget.reservation.course.duration);
+
+    return partner != null
+        ? Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10)
       ),
@@ -45,8 +55,12 @@ class _ReservationCardState extends State<ReservationCard> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
-            image: AssetImage(widget.reservation.image),
+            image: AssetImage("assets/images/${widget.reservation.course.activity.image1}"),
             fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.3),
+                BlendMode.srcOver
+            ),
           ),
         ),
         child: Padding(
@@ -69,8 +83,8 @@ class _ReservationCardState extends State<ReservationCard> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(jour, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 18),),
-                          Text(mois, style: TextStyle(color: Colors.white, fontSize: 16))
+                          Text(date[0], style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 18),),
+                          Text(date[1], style: TextStyle(color: Colors.white, fontSize: 16))
                         ],
                       )
                   ),
@@ -90,7 +104,9 @@ class _ReservationCardState extends State<ReservationCard> {
 
                       onDeleteClicked ? InkWell(
                           child: Text("Supprimer", style: TextStyle(color: Colors.red, fontSize: 16),),
-                          onTap: widget.deleting,
+                          onTap: (){
+                            Provider.of<CartView>(context,listen: false).deleteReservation(reservation: widget.reservation);
+                          },
 
                       ): SizedBox(),
                     ],
@@ -102,7 +118,7 @@ class _ReservationCardState extends State<ReservationCard> {
 
               //Displaying Title
               Text(
-                widget.reservation.title,
+                widget.reservation.course.courseInfos[0].title,
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
@@ -113,12 +129,12 @@ class _ReservationCardState extends State<ReservationCard> {
 
 
               //Displaying place
-              Text(widget.reservation.place, style: TextStyle(color: Colors.white, fontSize: 15)),
+              Text(partner != null ?partner!.name: "", style: TextStyle(color: Colors.white, fontSize: 15)),
               SizedBox(height: 7,),
 
 
               //Displaying duration if exists
-              duree != null ? DurationWidget(duree: duree!): SizedBox(),
+              DurationWidget(start: duration[0], end: duration[1]),
               SizedBox(height: 7,),
 
 
@@ -132,8 +148,10 @@ class _ReservationCardState extends State<ReservationCard> {
                 children: [
 
                   //Displating price
-                  DisplayPrice(
-                      text: widget.reservation.price.toStringAsFixed(2),
+                  PriceWidget(
+                      text: widget.reservation.course.daypassOnly != 1
+                          ? widget.reservation.course.courseInfos[0].nomadPrice!.toStringAsFixed(2)
+                          : partner!.passPrice.toStringAsFixed(2),
                       fontWeight: FontWeight.w800,
                       fontSizeMainText: 22,
                       fontSizeCurrency: 13
@@ -146,33 +164,29 @@ class _ReservationCardState extends State<ReservationCard> {
 
                       //Decrement Button
                       incdecButton(color: secondaryBackgroundColor, text: "-", onPressed: (){
-                        setState(() {
-
-                          if(widget.reservation.reservedPlaces>0){
-                            widget.reservation.reservedPlaces--;
-                            widget.updatingTotal();
-                          }
-                          if(widget.reservation.reservedPlaces==0){
-                            widget.deleting();
-                          }
-
-                        });
+                        if(widget.reservation.reservedPlaces>0){
+                          Provider.of<CartView>(context, listen: false).decrementReservationsPlaces(reservation: widget.reservation);
+                        }
+                        if(widget.reservation.reservedPlaces==0){
+                          Provider.of<CartView>(context, listen: false).deleteReservation(reservation: widget.reservation);
+                        }
                       }),
 
                       //Number of reserved places
                       SizedBox(
                         width: 40,
-                          child: Text( widget.reservation.reservedPlaces.toString(),
-                            style: TextStyle(color: Colors.white,fontSize: 16),textAlign: TextAlign.center,
+                          child: Consumer<CartView>(
+                            builder: (context,cart,child){
+                              return Text( cart.reservations.where((element) => element.course.id == widget.reservation.course.id).first.reservedPlaces.toString(),
+                                style: TextStyle(color: Colors.white,fontSize: 16),textAlign: TextAlign.center,
+                              );
+                            },
                           )
                       ),
 
                       //Increment Button
                       incdecButton(color: thirdBackgroundColor, text: "+",onPressed:  (){
-                        setState(() {
-                          widget.reservation.reservedPlaces++;
-                          widget.updatingTotal();
-                        });
+                          Provider.of<CartView>(context,listen: false).incrementReservationsPlaces(reservation: widget.reservation);
                       }),
                     ],
                   ),
@@ -182,11 +196,10 @@ class _ReservationCardState extends State<ReservationCard> {
           ),
         ),
       ),
-    );
+    )
+        : SizedBox();
   }
 }
-
-String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
 
 
 

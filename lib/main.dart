@@ -1,8 +1,20 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:wemove_test/screens/panier_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:wemove_test/constants/http_client.dart';
+import 'package:wemove_test/ui/screens/activity_screen.dart';
+import 'package:wemove_test/core/view_models/cart_view.dart';
+
 
 void main() {
-  runApp(const MyApp());
+  HttpOverrides.global = new MyHttpOverrides();
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => CartView(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +27,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'WeMove',
-      home: PanierScreen(),
+      home: ActivityScreen(),
     );
   }
 }
