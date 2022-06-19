@@ -3,17 +3,17 @@ import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:wemove_test/constants/colors.dart';
 import 'package:wemove_test/core/view_models/cart_view.dart';
-import 'package:wemove_test/ui/widgets/panier_widgets/panier_widgets.dart';
-import 'package:wemove_test/ui/widgets/panier_widgets/reservation_card.dart';
+import 'package:wemove_test/ui/widgets/cart_widgets/cart_widgets.dart';
+import 'package:wemove_test/ui/widgets/cart_widgets/reservation_card.dart';
 
-class PanierScreen extends StatefulWidget {
-  const PanierScreen({Key? key}) : super(key: key);
+class CartScreen extends StatefulWidget {
+  const CartScreen({Key? key}) : super(key: key);
 
   @override
-  _PanierScreenState createState() => _PanierScreenState();
+  _CartScreenState createState() => _CartScreenState();
 }
 
-class _PanierScreenState extends State<PanierScreen> {
+class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {

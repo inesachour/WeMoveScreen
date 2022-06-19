@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wemove_test/core/models/course.dart';
 import 'package:wemove_test/core/models/partner.dart';
-import 'package:wemove_test/ui/screens/panier_screen.dart';
+import 'package:wemove_test/ui/screens/cart_screen.dart';
 import 'package:wemove_test/core/services/dates_service.dart';
 import 'package:wemove_test/core/services/partners_service.dart';
 import 'package:wemove_test/core/view_models/cart_view.dart';
@@ -99,7 +99,7 @@ class _CourseCardState extends State<CourseCard> {
                           child: Text("Réserver"),
                           onPressed: (){
                             Provider.of<CartView>(context,listen: false).addReservation(course: widget.course, passPrice: widget.course.daypassOnly == 1 ? snapshot.data!.passPrice : widget.course.courseInfos[0].nomadPrice);
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => PanierScreen()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen()));
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(thirdBackgroundColor),

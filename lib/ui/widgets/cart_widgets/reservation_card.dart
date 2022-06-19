@@ -7,7 +7,7 @@ import 'package:wemove_test/core/services/dates_service.dart';
 import 'package:wemove_test/core/services/partners_service.dart';
 import 'package:wemove_test/core/view_models/cart_view.dart';
 import 'package:wemove_test/ui/widgets/common/display_widgets.dart';
-import 'package:wemove_test/ui/widgets/panier_widgets/panier_widgets.dart';
+import 'package:wemove_test/ui/widgets/cart_widgets/cart_widgets.dart';
 
 class ReservationCard extends StatefulWidget {
 

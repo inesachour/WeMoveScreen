@@ -3,7 +3,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wemove_test/constants/colors.dart';
-import 'package:wemove_test/ui/screens/panier_screen.dart';
+import 'package:wemove_test/ui/screens/cart_screen.dart';
 import 'package:wemove_test/core/view_models/cart_view.dart';
 
 Widget ActivityAppBarWidget({required BuildContext context}){
@@ -38,7 +38,7 @@ Widget ActivityAppBarWidget({required BuildContext context}){
             badgeColor: thirdBackgroundColor,
           ),
           onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => PanierScreen()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen()));
           },
         ),
 
