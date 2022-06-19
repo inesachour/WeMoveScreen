@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:wemove_test/constants/colors.dart';
-import 'package:wemove_test/view_models/cart_view.dart';
-import 'package:wemove_test/widgets/panier_widgets/panier_widgets.dart';
-import 'package:wemove_test/widgets/panier_widgets/reservation_card.dart';
+import 'package:wemove_test/core/view_models/cart_view.dart';
+import 'package:wemove_test/ui/widgets/panier_widgets/panier_widgets.dart';
+import 'package:wemove_test/ui/widgets/panier_widgets/reservation_card.dart';
 
 class PanierScreen extends StatefulWidget {
   const PanierScreen({Key? key}) : super(key: key);

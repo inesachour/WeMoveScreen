@@ -3,8 +3,8 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wemove_test/constants/colors.dart';
-import 'package:wemove_test/screens/panier_screen.dart';
-import 'package:wemove_test/view_models/cart_view.dart';
+import 'package:wemove_test/ui/screens/panier_screen.dart';
+import 'package:wemove_test/core/view_models/cart_view.dart';
 
 Widget ActivityAppBarWidget({required BuildContext context}){
   return Row(

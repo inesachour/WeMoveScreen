@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wemove_test/constants/colors.dart';
-import 'package:wemove_test/view_models/cart_view.dart';
-import 'package:wemove_test/widgets/common/display_widgets.dart';
+import 'package:wemove_test/core/view_models/cart_view.dart';
+import 'package:wemove_test/ui/widgets/common/display_widgets.dart';
 
 Widget BottomNavBar({required double height, required double width}){
   return Row(

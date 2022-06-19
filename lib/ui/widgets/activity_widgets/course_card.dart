@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wemove_test/models/course.dart';
-import 'package:wemove_test/models/partner.dart';
-import 'package:wemove_test/screens/panier_screen.dart';
-import 'package:wemove_test/services/dates_service.dart';
-import 'package:wemove_test/services/partners_service.dart';
-import 'package:wemove_test/view_models/cart_view.dart';
-import 'package:wemove_test/widgets/common/display_widgets.dart';
+import 'package:wemove_test/core/models/course.dart';
+import 'package:wemove_test/core/models/partner.dart';
+import 'package:wemove_test/ui/screens/panier_screen.dart';
+import 'package:wemove_test/core/services/dates_service.dart';
+import 'package:wemove_test/core/services/partners_service.dart';
+import 'package:wemove_test/core/view_models/cart_view.dart';
+import 'package:wemove_test/ui/widgets/common/display_widgets.dart';
 
-import '../../constants/colors.dart';
+import '../../../constants/colors.dart';
 
 class CourseCard extends StatefulWidget {
   CourseCard({required this.course});

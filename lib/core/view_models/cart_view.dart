@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:wemove_test/models/course.dart';
-import 'package:wemove_test/models/reservation.dart';
+import 'package:wemove_test/core/models/course.dart';
+import 'package:wemove_test/core/models/reservation.dart';
 
 class CartView extends ChangeNotifier{
 

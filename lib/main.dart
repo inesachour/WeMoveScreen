@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wemove_test/screens/activity_screen.dart';
-import 'package:wemove_test/view_models/cart_view.dart';
+import 'package:wemove_test/ui/screens/activity_screen.dart';
+import 'package:wemove_test/core/view_models/cart_view.dart';
 
 
 class MyHttpOverrides extends HttpOverrides{

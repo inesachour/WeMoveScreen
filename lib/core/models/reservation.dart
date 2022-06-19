@@ -1,4 +1,4 @@
-import 'package:wemove_test/models/course.dart';
+import 'package:wemove_test/core/models/course.dart';
 
 class Reservation{
 

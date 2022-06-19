@@ -1,7 +1,7 @@
 
 import 'dart:convert';
 
-import 'package:wemove_test/models/course.dart';
+import 'package:wemove_test/core/models/course.dart';
 import 'package:http/http.dart' as http;
 
 class CoursesService{

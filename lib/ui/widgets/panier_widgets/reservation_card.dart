@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:wemove_test/constants/colors.dart';
-import 'package:wemove_test/models/partner.dart';
-import 'package:wemove_test/models/reservation.dart';
-import 'package:wemove_test/services/dates_service.dart';
-import 'package:wemove_test/services/partners_service.dart';
-import 'package:wemove_test/view_models/cart_view.dart';
-import 'package:wemove_test/widgets/common/display_widgets.dart';
-import 'package:wemove_test/widgets/panier_widgets/panier_widgets.dart';
+import 'package:wemove_test/core/models/partner.dart';
+import 'package:wemove_test/core/models/reservation.dart';
+import 'package:wemove_test/core/services/dates_service.dart';
+import 'package:wemove_test/core/services/partners_service.dart';
+import 'package:wemove_test/core/view_models/cart_view.dart';
+import 'package:wemove_test/ui/widgets/common/display_widgets.dart';
+import 'package:wemove_test/ui/widgets/panier_widgets/panier_widgets.dart';
 
 class ReservationCard extends StatefulWidget {
 

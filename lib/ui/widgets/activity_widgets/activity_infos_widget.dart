@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wemove_test/models/activity.dart';
-import 'package:wemove_test/widgets/activity_widgets/activity_widgets.dart';
+import 'package:wemove_test/core/models/activity.dart';
+import 'package:wemove_test/ui/widgets/activity_widgets/activity_widgets.dart';
 
 Widget ActivityInfos({required Activity activity, required BuildContext context,}){
   return Stack(

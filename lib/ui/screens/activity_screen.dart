@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:wemove_test/constants/colors.dart';
-import 'package:wemove_test/models/activity.dart';
-import 'package:wemove_test/models/course.dart';
-import 'package:wemove_test/services/activities_service.dart';
-import 'package:wemove_test/services/courses_service.dart';
-import 'package:wemove_test/widgets/activity_widgets/activity_infos_widget.dart';
-import 'package:wemove_test/widgets/activity_widgets/course_card.dart';
-import 'package:wemove_test/widgets/activity_widgets/activity_widgets.dart';
+import 'package:wemove_test/core/models/activity.dart';
+import 'package:wemove_test/core/models/course.dart';
+import 'package:wemove_test/core/services/activities_service.dart';
+import 'package:wemove_test/core/services/courses_service.dart';
+import 'package:wemove_test/ui/widgets/activity_widgets/activity_infos_widget.dart';
+import 'package:wemove_test/ui/widgets/activity_widgets/course_card.dart';
+import 'package:wemove_test/ui/widgets/activity_widgets/activity_widgets.dart';
 
 class ActivityScreen extends StatefulWidget {
   const ActivityScreen({Key? key}) : super(key: key);
