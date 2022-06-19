@@ -11,6 +11,10 @@ Widget ActivityInfos({required Activity activity, required BuildContext context,
             image: AssetImage("assets/images/${activity.image1}"),
             opacity: 0.75,
             fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.3),
+                BlendMode.srcOver
+            ),
           ),
         ),
       ),

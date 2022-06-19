@@ -62,6 +62,10 @@ class _ReservationCardState extends State<ReservationCard> {
           image: DecorationImage(
             image: AssetImage("assets/images/${widget.reservation.course.activity.image1}"),
             fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.3),
+                BlendMode.srcOver
+            ),
           ),
         ),
         child: Padding(
