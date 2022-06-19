@@ -16,73 +16,68 @@ class ActivityScreen extends StatefulWidget {
 }
 
 class _ActivityScreenState extends State<ActivityScreen> {
-  Future<Activity?> activityFuture = ActivitiesService.getActivity();
-  Future<List<Course>?> coursesFuture = CoursesService.getCourses();
-
-  Activity? activity;
-  List<Course>? courses;
-
-  Future getData() async{
-    activityFuture.then((value) {
-      if(mounted && activity ==null){
-        setState(() {
-          activity = value;
-        });
-      }
-
-    });
-    coursesFuture.then((value) {
-      if(mounted && courses==null){
-        setState(() {
-          courses = value;
-        });
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
 
-    getData();
 
     return Scaffold(
       backgroundColor: secondaryBackgroundColor,
       body: SafeArea(
-        child: activity != null ? Stack(
-          children: [
-            SingleChildScrollView(
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height,
-                child: Column(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: ActivityInfos(activity: activity!, context: context)
-                    ),
+        child: FutureBuilder<Activity?>(
+          future: ActivitiesService.getActivity(),
+          builder: (context,snapshot){
+            if(snapshot.connectionState == ConnectionState.waiting){
+              return Center(child: CircularProgressIndicator());
+            }
+            else {
+              return Stack(
+                children: [
+                  SingleChildScrollView(
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      child: Column(
+                        children: [
+                          Expanded(
+                              flex: 2,
+                              child: ActivityInfos(activity: snapshot.data!, context: context)
+                          ),
 
-                    Expanded(
-                      flex: 3,
-                      child: courses != null ? ListView.builder(
-                          itemCount: courses!.length,
-                          itemBuilder: (context,index){
-                            return CourseCard(
-                              course: courses![index],
-                            );
-                          }
-                      )
-                      : Center(child: CircularProgressIndicator()),
+                          Expanded(
+                            flex: 3,
+                            child: FutureBuilder<List<Course>?>(
+                              future: CoursesService.getCourses(),
+                              builder: (context,snapshot){
+                                if(snapshot.connectionState == ConnectionState.waiting){
+                                  return Center(child: CircularProgressIndicator());
+                                }
+                                else{
+                                  return ListView.builder(
+                                      itemCount: snapshot.data!.length,
+                                      itemBuilder: (context,index){
+                                        return CourseCard(
+                                          course: snapshot.data![index],
+                                        );
+                                      }
+                                  );
+                                }
+                              },
+                            )
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-                width: MediaQuery.of(context).size.width,
-                top: 0,
-                child: ActivityAppBarWidget(context: context)
-            )
-          ],
-        ) : Center(child: CircularProgressIndicator()),
+                  ),
+                  Positioned(
+                      width: MediaQuery.of(context).size.width,
+                      top: 0,
+                      child: ActivityAppBarWidget(context: context)
+                  )
+                ],
+              );
+            }
+          },
+        ),
       ),
     );
   }

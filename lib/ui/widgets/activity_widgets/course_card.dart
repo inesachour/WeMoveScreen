@@ -21,114 +21,105 @@ class CourseCard extends StatefulWidget {
 
 class _CourseCardState extends State<CourseCard> {
 
-  Partner? partner;
-
   @override
   Widget build(BuildContext context) {
 
     List<String> duration = DatesService.getTime(widget.course.courseInfos[0].date, widget.course.duration);
-
-    Future<Partner?> futurePartner = PartnersService.getPartnerById(widget.course.partnerId);
-
-    getPartner()async{
-      futurePartner.then((value) {
-        if(mounted && partner == null){
-          setState(() {
-            partner = value;
-          });
-        }
-
-      });
-    }
-
-    getPartner();
-
     List<String> date = DatesService.getLongDate(widget.course.courseInfos[0].date);
 
-    return Card(
-      color: primaryBackgroundColor,
-      child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: partner != null
-            ? Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-
-                Row(
-                  children: [
-                    Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: AssetImage("assets/images/${partner!.logo}"),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10,),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(widget.course.courseInfos[0].title,style: TextStyle(color: Colors.white),),
-                        Text(partner != null ? partner!.name : "",style: TextStyle(color: Colors.white)),
-                        partner!= null ? Text(partner!.geoZone.geoZoneLabel.label,style: TextStyle(color: Colors.white)) : SizedBox()
-                      ],
-                    ),
-                  ],
-                ),
-                widget.course.courseInfos[0].nomadPrice != null ? PriceWidget(text: widget.course.courseInfos[0].nomadPrice.toString()) : SizedBox()
-              ],
-            ),
-
-            SizedBox(height: 10,),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+    return FutureBuilder<Partner?>(
+      future: PartnersService.getPartnerById(widget.course.partnerId),
+      builder: (context,snapshot){
+        if(snapshot.connectionState == ConnectionState.waiting){
+          return SizedBox();
+        }
+        else {
+          return Card(
+            color: primaryBackgroundColor,
+            child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: Column(
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Icon(Icons.calendar_month_sharp, color: Colors.white,),
-                        SizedBox(width: 5,),
-                        Text("${date[0]} le ${date[1]} ${date[2]}" , style: TextStyle(color: Colors.white),)
+
+                        Row(
+                          children: [
+                            Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  image: AssetImage("assets/images/${snapshot.data!.logo}"),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 10,),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(widget.course.courseInfos[0].title,style: TextStyle(color: Colors.white),),
+                                Text(snapshot.data!.name,style: TextStyle(color: Colors.white)),
+                                Text(snapshot.data!.geoZone.geoZoneLabel.label,style: TextStyle(color: Colors.white))
+                              ],
+                            ),
+                          ],
+                        ),
+                        widget.course.courseInfos[0].nomadPrice != null ? PriceWidget(text: widget.course.courseInfos[0].nomadPrice.toString()) : SizedBox()
                       ],
                     ),
 
-                    SizedBox(height: 3,),
+                    SizedBox(height: 10,),
 
-                    DurationWidget(start: duration[0], end: duration[1]),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(Icons.calendar_month_sharp, color: Colors.white,),
+                                SizedBox(width: 5,),
+                                Text("${date[0]} le ${date[1]} ${date[2]}" , style: TextStyle(color: Colors.white),)
+                              ],
+                            ),
 
-                  ],
-                ),
+                            SizedBox(height: 3,),
 
-                ElevatedButton(
-                  child: Text("Réserver"),
-                  onPressed: (){
-                    Provider.of<CartView>(context,listen: false).addReservation(course: widget.course, passPrice: widget.course.daypassOnly == 1 ? partner!.passPrice : widget.course.courseInfos[0].nomadPrice);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => PanierScreen()));
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(thirdBackgroundColor),
-                    fixedSize: MaterialStateProperty.all(Size(MediaQuery.of(context).size.width*0.32,MediaQuery.of(context).size.height*0.08)),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)
-                      ),
+                            DurationWidget(start: duration[0], end: duration[1]),
+
+                          ],
+                        ),
+
+                        ElevatedButton(
+                          child: Text("Réserver"),
+                          onPressed: (){
+                            Provider.of<CartView>(context,listen: false).addReservation(course: widget.course, passPrice: widget.course.daypassOnly == 1 ? snapshot.data!.passPrice : widget.course.courseInfos[0].nomadPrice);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => PanierScreen()));
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(thirdBackgroundColor),
+                            fixedSize: MaterialStateProperty.all(Size(MediaQuery.of(context).size.width*0.32,MediaQuery.of(context).size.height*0.08)),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
                     ),
-                  ),
+                  ],
                 )
-              ],
             ),
-          ],
-        )
-            : SizedBox(),
-      ),
+          );
+        }
+
+      },
     );
   }
 }
