@@ -30,7 +30,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
             if(snapshot.connectionState == ConnectionState.waiting){
               return Center(child: CircularProgressIndicator());
             }
-            else {
+            else if(snapshot.hasData){
               return Stack(
                 children: [
                   SingleChildScrollView(
@@ -54,6 +54,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
                                 else{
                                   return ListView.builder(
                                       itemCount: snapshot.data!.length,
+                                      padding: EdgeInsets.only(bottom: 25),
                                       itemBuilder: (context,index){
                                         return CourseCard(
                                           course: snapshot.data![index],
@@ -75,6 +76,9 @@ class _ActivityScreenState extends State<ActivityScreen> {
                   )
                 ],
               );
+            }
+            else{
+              return Center(child: CircularProgressIndicator(),);
             }
           },
         ),

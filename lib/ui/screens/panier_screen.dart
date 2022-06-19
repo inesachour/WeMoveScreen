@@ -21,9 +21,6 @@ class _PanierScreenState extends State<PanierScreen> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
-
-    CartView cart = Provider.of<CartView>(context);
-
     return Scaffold(
 
       //APPBAR
@@ -61,28 +58,32 @@ class _PanierScreenState extends State<PanierScreen> {
                   TopPartPanier(width: width, height: height, context: context),
 
                   //Reservations List
-                  Expanded(
-                    flex: 7,
-                    child: cart.reservations.length > 0 ? ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemCount: cart.reservations.length,
-                        itemBuilder: (context, index){
-                          return Dismissible(
-                            key: Key(cart.reservations[index].course.id.toString()),
-                            child: ReservationCard(
-                              reservation: cart.reservations[index],
-                            ),
-                            onDismissed: (direction) {
-                              Provider.of<CartView>(context, listen: false).deleteReservation(reservation: cart.reservations[index]);
-                            },
-                          );
-                        }
-                    ) : SizedBox.expand(
-                        child: Center(
-                            child: Text("Pas encore d'endorphines par ici",
-                              style: TextStyle(color: Colors.white, fontSize: 18),)
-                        )
-                    ),
+                  Consumer<CartView>(
+                    builder: (context,cart,child){
+                      return Expanded(
+                        flex: 7,
+                        child: cart.reservations.length > 0 ? ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            itemCount: cart.reservations.length,
+                            itemBuilder: (context, index){
+                              return Dismissible(
+                                key: Key(cart.reservations[index].course.id.toString()),
+                                child: ReservationCard(
+                                  reservation: cart.reservations[index],
+                                ),
+                                onDismissed: (direction) {
+                                  Provider.of<CartView>(context, listen: false).deleteReservation(reservation: cart.reservations[index]);
+                                },
+                              );
+                            }
+                        ) : SizedBox.expand(
+                            child: Center(
+                                child: Text("Pas encore d'endorphines par ici",
+                                  style: TextStyle(color: Colors.white, fontSize: 18),)
+                            )
+                        ),
+                      );
+                    },
                   ),
                   SizedBox(height: height*0.11,),
                 ],

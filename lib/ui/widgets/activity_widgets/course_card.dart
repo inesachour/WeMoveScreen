@@ -33,7 +33,7 @@ class _CourseCardState extends State<CourseCard> {
         if(snapshot.connectionState == ConnectionState.waiting){
           return SizedBox();
         }
-        else {
+        else if(snapshot.hasData) {
           return Card(
             color: primaryBackgroundColor,
             child: Padding(
@@ -117,6 +117,9 @@ class _CourseCardState extends State<CourseCard> {
                 )
             ),
           );
+        }
+        else{
+        return Center(child: CircularProgressIndicator(),);
         }
 
       },
